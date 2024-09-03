@@ -2,7 +2,7 @@
 
 Stephen Schüürhuis, Gernot Wassmer, Meinhard Kieser, Friedrich Pahlke, Cornelia Ursula Kunz, Carolin Herrmann
 
-Code to reproduce the plots and results of the article is demonstrated in the Quarto document index.qmd / index.html.
+Code to reproduce the plots and results of the article is demonstrated in the [Quarto document](https://fpahlke.github.io/gsdwdr/).
 
 ### The code was produced with the following versions of R and packages:
 
@@ -10,7 +10,8 @@ R version 4.1.2 (2021-11-01) Platform: x86_64-w64-mingw32/x64 (64-bit) Running u
 
 Matrix products: default
 
-locale: [1] LC_COLLATE=German_Germany.1252 LC_CTYPE=German_Germany.1252\
+locale: 
+[1] LC_COLLATE=German_Germany.1252 LC_CTYPE=German_Germany.1252\
 [3] LC_MONETARY=German_Germany.1252 LC_NUMERIC=C\
 [5] LC_TIME=German_Germany.1252
 
