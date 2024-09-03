@@ -194,9 +194,9 @@ window.Quarto = {
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"mvtnorm"</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/util.R"</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/getDoubleRejectionDesign.R"</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/getPowerMeansDoubleRejectionApproach.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/utilities.R"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/double_rejection_design.R"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/power_means_double_rejection_approach.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -222,7 +222,7 @@ window.Quarto = {
 </div>
 <section id="standard-group-sequential-design" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="standard-group-sequential-design"><span class="header-section-number">4.1</span> Standard group-sequential design</h2>
-<p>At first, we consider a standard group-sequential design with a nonbinding futility boundary. In this option, we pretend as if there were no pipeline data since those would not be used during testing. This is done by setting <code>delayedInformation = 0</code> and <code>bindingFutility = F</code>.</p>
+<p>At first, we consider a standard group-sequential design with a nonbinding futility boundary. In this option, we pretend as if there were no pipeline data since those would not be used during testing. This is done by setting <code>delayedInformation = 0</code> and <code>bindingFutility = FALSE</code>.</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
@@ -235,7 +235,7 @@ window.Quarto = {
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> alphaSpending,</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> betaSpending,</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> <span class="dv">0</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> F</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gsDesign)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -298,7 +298,7 @@ window.Quarto = {
 </section>
 <section id="delayed-response-group-sequential-design-according-to-hampson-and-jennison-2013" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="delayed-response-group-sequential-design-according-to-hampson-and-jennison-2013"><span class="header-section-number">4.2</span> Delayed response group-sequential design according to Hampson and Jennison (2013)</h2>
-<p>Secondly, we initialize the delayed response group-sequential design by Hampson and Jennison (2013). We, however, propose a slightly modified version which is such that the lower boundary is nonbinding. We initialize this design by setting <code>delayedInformation = 0.3</code> and, again, <code>bindingFutility = F</code>.</p>
+<p>Secondly, we initialize the delayed response group-sequential design by Hampson and Jennison (2013). We, however, propose a slightly modified version which is such that the lower boundary is nonbinding. We initialize this design by setting <code>delayedInformation = 0.3</code> and, again, <code>bindingFutility = FALSE</code>.</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
@@ -311,7 +311,7 @@ window.Quarto = {
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> alphaSpending,</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> betaSpending,</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> delayedInformation,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> F</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(drgsDesign)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -754,7 +754,7 @@ E[N] \\ \end{align}\]</span> We achieve this slight adjustment by adding <code>(
 <span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>        <span class="at">typeOfDesign =</span> cases<span class="sc">$</span>alphaSpending[i],</span>
 <span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>        <span class="at">typeBetaSpending =</span> cases<span class="sc">$</span>betaSpending[i],</span>
 <span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>        <span class="at">delayedInformation =</span> <span class="dv">0</span>,</span>
-<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>        <span class="at">bindingFutility =</span> F</span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>        <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
 <span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>    index <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>nAlternative</span>
@@ -785,7 +785,7 @@ E[N] \\ \end{align}\]</span> We achieve this slight adjustment by adding <code>(
 <span id="cb13-111"><a href="#cb13-111" aria-hidden="true" tabindex="-1"></a>        <span class="at">typeOfDesign =</span> cases<span class="sc">$</span>alphaSpending[i],</span>
 <span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a>        <span class="at">typeBetaSpending =</span> cases<span class="sc">$</span>betaSpending[i],</span>
 <span id="cb13-113"><a href="#cb13-113" aria-hidden="true" tabindex="-1"></a>        <span class="at">delayedInformation =</span> cases<span class="sc">$</span>delayedInformation[i],</span>
-<span id="cb13-114"><a href="#cb13-114" aria-hidden="true" tabindex="-1"></a>        <span class="at">bindingFutility =</span> F</span>
+<span id="cb13-114"><a href="#cb13-114" aria-hidden="true" tabindex="-1"></a>        <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
 <span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb13-116"><a href="#cb13-116" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-117"><a href="#cb13-117" aria-hidden="true" tabindex="-1"></a>    index <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> nAlternative)<span class="sc">:</span>(<span class="dv">2</span> <span class="sc">*</span> nAlternative)</span>
@@ -1019,121 +1019,119 @@ E[N] \\ \end{align}\]</span> We achieve this slight adjustment by adding <code>(
 <span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
 <span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Delayed response group-sequential design</span></span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>drgsDesign <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">kMax =</span> <span class="dv">2</span>,</span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
-<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">informationRates =</span> informationRates,</span>
-<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> typeOfDesign,</span>
-<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> delayedInformation,</span>
-<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> typeBetaSpending,</span>
-<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
-<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Double Rejection Design</span></span>
-<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>drDesign <span class="ot">&lt;-</span> <span class="fu">getDoubleRejectionDesign</span>(</span>
-<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">informationRates =</span> informationRates,</span>
-<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
-<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
-<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> typeOfDesign,</span>
-<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> typeBetaSpending,</span>
-<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> delayedInformation</span>
-<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Delayed response group-sequential design</span></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>drgsDesign <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">kMax =</span> <span class="dv">2</span>,</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">informationRates =</span> informationRates,</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> typeOfDesign,</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> delayedInformation,</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> typeBetaSpending,</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Double Rejection Design</span></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>drDesign <span class="ot">&lt;-</span> <span class="fu">getDoubleRejectionDesign</span>(</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">informationRates =</span> informationRates,</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> typeOfDesign,</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> typeBetaSpending,</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> delayedInformation</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">19032024</span></span>
 <span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">19032024</span></span>
-<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
-<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(seed <span class="sc">+</span> i)</span>
-<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulating multivariate normal random variables as test statistics</span></span>
-<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>    statistics <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">10000</span>, <span class="at">mean =</span> mu, <span class="at">sigma =</span> sigma)</span>
-<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>    Z1 <span class="ot">&lt;-</span> statistics[, <span class="dv">1</span>]</span>
-<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>    Z1tilde <span class="ot">&lt;-</span> statistics[, <span class="dv">2</span>]</span>
-<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>    Z12 <span class="ot">&lt;-</span> statistics[, <span class="dv">3</span>]</span>
-<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulate power and expected sample size values for all designs</span></span>
-<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a>    powerGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
-<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>        (gsDesign<span class="sc">$</span>futilityBounds <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
-<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a>            Z12 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">2</span>]))</span>
-<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a>    eNGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span></span>
-<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (Z1 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">|</span></span>
-<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a>            (Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>])) <span class="sc">+</span></span>
-<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (gsDesign<span class="sc">$</span>futilityBounds <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]))</span>
-<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a>    powerDRGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
-<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a>        Z1tilde <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
-<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a>        (Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
-<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a>            Z1tilde <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
-<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a>        (drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span></span>
-<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a>            Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
-<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a>            Z12 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">2</span>]))</span>
-<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a>    eNDRGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span> maxNumberOfSubjects <span class="sc">*</span></span>
-<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a>        ((Z1 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
-<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a>            (Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>])) <span class="sc">+</span> maxNumberOfSubjects <span class="sc">*</span></span>
-<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a>            (drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]))</span>
-<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a>    powerDRD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">&amp;</span> Z1tilde <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">2</span>]) <span class="sc">|</span></span>
-<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a>        (drDesign<span class="sc">$</span>lower[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">&amp;</span> Z12 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">3</span>]))</span>
-<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a>    enDRD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span> maxNumberOfSubjects <span class="sc">*</span></span>
-<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a>        (Z1 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">|</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>lower[<span class="dv">1</span>]) <span class="sc">+</span></span>
-<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (drDesign<span class="sc">$</span>lower[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>]))</span>
-<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save results in data frame</span></span>
-<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a>    resultsSim[i, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, powerGSD, eNGSD)</span>
-<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a>    resultsSim[i <span class="sc">+</span> nsim, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"drgsDesign"</span>, powerDRGSD, eNDRGSD)</span>
-<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a>    resultsSim[i <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> nsim, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"drDesign"</span>, powerDRD, enDRD)</span>
-<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a><span class="co"># Save results</span></span>
-<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>Method <span class="ot">&lt;-</span> <span class="fu">factor</span>(resultsSim<span class="sc">$</span>Method,</span>
-<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>),</span>
-<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
-<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>Power <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(resultsSim<span class="sc">$</span>Power)</span>
-<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>eN <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(resultsSim<span class="sc">$</span>expectedNumberOfSubjects)</span>
-<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a><span class="co"># Theme for plotting simulation results</span></span>
-<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a>theme_sim <span class="ot">&lt;-</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"italic"</span>),</span>
-<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
-<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"cm"</span>),</span>
-<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
-<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
-<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>),</span>
-<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>)</span>
-<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-138"><a href="#cb15-138" aria-hidden="true" tabindex="-1"></a><span class="co"># Power simulation</span></span>
-<span id="cb15-139"><a href="#cb15-139" aria-hidden="true" tabindex="-1"></a>power_sim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(resultsSim, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> Power, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
-<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>)) <span class="sc">+</span></span>
-<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">0.85</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">0.83</span>, <span class="fl">0.84</span>, <span class="fl">0.85</span>)) <span class="sc">+</span></span>
-<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Simulated Power"</span>) <span class="sc">+</span></span>
-<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen4"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
-<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a>    theme_sim</span>
-<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected sample size simulation</span></span>
-<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a>eN_sim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(resultsSim, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> eN, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
-<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>)) <span class="sc">+</span></span>
-<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">366</span>, <span class="dv">372</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">366</span>, <span class="dv">368</span>, <span class="dv">370</span>, <span class="dv">372</span>)) <span class="sc">+</span></span>
-<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"E[N]"</span>) <span class="sc">+</span></span>
-<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen4"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
-<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a>    theme_sim</span>
-<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a>power_sim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(seed <span class="sc">+</span> i)</span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulating multivariate normal random variables as test statistics</span></span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>    statistics <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">10000</span>, <span class="at">mean =</span> mu, <span class="at">sigma =</span> sigma)</span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>    Z1 <span class="ot">&lt;-</span> statistics[, <span class="dv">1</span>]</span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>    Z1tilde <span class="ot">&lt;-</span> statistics[, <span class="dv">2</span>]</span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>    Z12 <span class="ot">&lt;-</span> statistics[, <span class="dv">3</span>]</span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulate power and expected sample size values for all designs</span></span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a>    powerGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>        (gsDesign<span class="sc">$</span>futilityBounds <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a>            Z12 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">2</span>]))</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a>    eNGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span></span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (Z1 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">|</span></span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a>            (Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (gsDesign<span class="sc">$</span>futilityBounds <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]))</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a>    powerDRGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a>        Z1tilde <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a>        (Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a>            Z1tilde <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a>        (drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span></span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a>            Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a>            Z12 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">2</span>]))</span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a>    eNDRGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span> maxNumberOfSubjects <span class="sc">*</span></span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a>        ((Z1 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a>            (Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>])) <span class="sc">+</span> maxNumberOfSubjects <span class="sc">*</span></span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a>            (drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]))</span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a>    powerDRD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">&amp;</span> Z1tilde <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">2</span>]) <span class="sc">|</span></span>
+<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a>        (drDesign<span class="sc">$</span>lower[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">&amp;</span> Z12 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">3</span>]))</span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a>    enDRD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span> maxNumberOfSubjects <span class="sc">*</span></span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a>        (Z1 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">|</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>lower[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (drDesign<span class="sc">$</span>lower[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>]))</span>
+<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save results in data frame</span></span>
+<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a>    resultsSim[i, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, powerGSD, eNGSD)</span>
+<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a>    resultsSim[i <span class="sc">+</span> nsim, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"drgsDesign"</span>, powerDRGSD, eNDRGSD)</span>
+<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a>    resultsSim[i <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> nsim, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"drDesign"</span>, powerDRD, enDRD)</span>
+<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Save results</span></span>
+<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>Method <span class="ot">&lt;-</span> <span class="fu">factor</span>(resultsSim<span class="sc">$</span>Method,</span>
+<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>),</span>
+<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>Power <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(resultsSim<span class="sc">$</span>Power)</span>
+<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>eN <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(resultsSim<span class="sc">$</span>expectedNumberOfSubjects)</span>
+<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a><span class="co"># Theme for plotting simulation results</span></span>
+<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a>theme_sim <span class="ot">&lt;-</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"italic"</span>),</span>
+<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"cm"</span>),</span>
+<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a><span class="co"># Power simulation</span></span>
+<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a>power_sim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(resultsSim, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> Power, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
+<span id="cb15-138"><a href="#cb15-138" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb15-139"><a href="#cb15-139" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>)) <span class="sc">+</span></span>
+<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">0.85</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">0.83</span>, <span class="fl">0.84</span>, <span class="fl">0.85</span>)) <span class="sc">+</span></span>
+<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Simulated Power"</span>) <span class="sc">+</span></span>
+<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen4"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a>    theme_sim</span>
+<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected sample size simulation</span></span>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a>eN_sim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(resultsSim, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> eN, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
+<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>)) <span class="sc">+</span></span>
+<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">366</span>, <span class="dv">372</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">366</span>, <span class="dv">368</span>, <span class="dv">370</span>, <span class="dv">372</span>)) <span class="sc">+</span></span>
+<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"E[N]"</span>) <span class="sc">+</span></span>
+<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen4"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a>    theme_sim</span>
+<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a>power_sim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1154,6 +1152,11 @@ E[N] \\ \end{align}\]</span> We achieve this slight adjustment by adding <code>(
 </div>
 </div>
 </div>
+<hr>
+<p>System: rpact 4.0.0, R version 4.4.1 (2024-06-14), platform: x86_64-pc-linux-gnu</p>
+<p>To cite R in publications use:</p>
+<p>R Core Team (2024). <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing, Vienna, Austria. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>. To cite package ‘rpact’ in publications use:</p>
+<p>Wassmer G, Pahlke F (2024). <em>rpact: Confirmatory Adaptive Clinical Trial Design and Analysis</em>. R package version 4.0.0, <a href="https://CRAN.R-project.org/package=rpact" class="uri">https://CRAN.R-project.org/package=rpact</a>.</p>
 <!-- -->
 
 </section>
@@ -1699,9 +1702,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"mvtnorm"</span>)</span>
 <span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/util.R"</span>)</span>
-<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/getDoubleRejectionDesign.R"</span>)</span>
-<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/getPowerMeansDoubleRejectionApproach.R"</span>)</span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/utilities.R"</span>)</span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/double_rejection_design.R"</span>)</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/power_means_double_rejection_approach.R"</span>)</span>
 <span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a><span class="fu"># Initialize the different designs</span></span>
@@ -1734,7 +1737,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a>At first, we consider a standard group-sequential design with a nonbinding</span>
 <span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a>futility boundary. In this option, we pretend as if there were no pipeline data</span>
 <span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>since those would not be used during testing. This is done by setting</span>
-<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a><span class="in">`delayedInformation = 0`</span> and <span class="in">`bindingFutility = F`</span>.</span>
+<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a><span class="in">`delayedInformation = 0`</span> and <span class="in">`bindingFutility = FALSE`</span>.</span>
 <span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
@@ -1748,7 +1751,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> alphaSpending,</span>
 <span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> betaSpending,</span>
 <span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> <span class="dv">0</span>,</span>
-<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> F</span>
+<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
 <span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gsDesign)</span>
 <span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -1758,7 +1761,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-133"><a href="#cb17-133" aria-hidden="true" tabindex="-1"></a>Secondly, we initialize the delayed response group-sequential design by Hampson</span>
 <span id="cb17-134"><a href="#cb17-134" aria-hidden="true" tabindex="-1"></a>and Jennison (2013). We, however, propose a slightly modified version which is</span>
 <span id="cb17-135"><a href="#cb17-135" aria-hidden="true" tabindex="-1"></a>such that the lower boundary is nonbinding. We initialize this design by setting</span>
-<span id="cb17-136"><a href="#cb17-136" aria-hidden="true" tabindex="-1"></a><span class="in">`delayedInformation = 0.3`</span> and, again, <span class="in">`bindingFutility = F`</span>.</span>
+<span id="cb17-136"><a href="#cb17-136" aria-hidden="true" tabindex="-1"></a><span class="in">`delayedInformation = 0.3`</span> and, again, <span class="in">`bindingFutility = FALSE`</span>.</span>
 <span id="cb17-137"><a href="#cb17-137" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-140"><a href="#cb17-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb17-141"><a href="#cb17-141" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
@@ -1772,7 +1775,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-149"><a href="#cb17-149" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> alphaSpending,</span>
 <span id="cb17-150"><a href="#cb17-150" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> betaSpending,</span>
 <span id="cb17-151"><a href="#cb17-151" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> delayedInformation,</span>
-<span id="cb17-152"><a href="#cb17-152" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> F</span>
+<span id="cb17-152"><a href="#cb17-152" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
 <span id="cb17-153"><a href="#cb17-153" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb17-154"><a href="#cb17-154" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-155"><a href="#cb17-155" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(drgsDesign)</span>
@@ -2128,7 +2131,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-519"><a href="#cb17-519" aria-hidden="true" tabindex="-1"></a>        <span class="at">typeOfDesign =</span> cases<span class="sc">$</span>alphaSpending[i],</span>
 <span id="cb17-520"><a href="#cb17-520" aria-hidden="true" tabindex="-1"></a>        <span class="at">typeBetaSpending =</span> cases<span class="sc">$</span>betaSpending[i],</span>
 <span id="cb17-521"><a href="#cb17-521" aria-hidden="true" tabindex="-1"></a>        <span class="at">delayedInformation =</span> <span class="dv">0</span>,</span>
-<span id="cb17-522"><a href="#cb17-522" aria-hidden="true" tabindex="-1"></a>        <span class="at">bindingFutility =</span> F</span>
+<span id="cb17-522"><a href="#cb17-522" aria-hidden="true" tabindex="-1"></a>        <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
 <span id="cb17-523"><a href="#cb17-523" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb17-524"><a href="#cb17-524" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-525"><a href="#cb17-525" aria-hidden="true" tabindex="-1"></a>    index <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>nAlternative</span>
@@ -2159,7 +2162,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-550"><a href="#cb17-550" aria-hidden="true" tabindex="-1"></a>        <span class="at">typeOfDesign =</span> cases<span class="sc">$</span>alphaSpending[i],</span>
 <span id="cb17-551"><a href="#cb17-551" aria-hidden="true" tabindex="-1"></a>        <span class="at">typeBetaSpending =</span> cases<span class="sc">$</span>betaSpending[i],</span>
 <span id="cb17-552"><a href="#cb17-552" aria-hidden="true" tabindex="-1"></a>        <span class="at">delayedInformation =</span> cases<span class="sc">$</span>delayedInformation[i],</span>
-<span id="cb17-553"><a href="#cb17-553" aria-hidden="true" tabindex="-1"></a>        <span class="at">bindingFutility =</span> F</span>
+<span id="cb17-553"><a href="#cb17-553" aria-hidden="true" tabindex="-1"></a>        <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
 <span id="cb17-554"><a href="#cb17-554" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb17-555"><a href="#cb17-555" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-556"><a href="#cb17-556" aria-hidden="true" tabindex="-1"></a>    index <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> nAlternative)<span class="sc">:</span>(<span class="dv">2</span> <span class="sc">*</span> nAlternative)</span>
@@ -2213,295 +2216,299 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-604"><a href="#cb17-604" aria-hidden="true" tabindex="-1"></a>        <span class="at">maxNumberOfSubjects =</span> maxNumberOfSubjects</span>
 <span id="cb17-605"><a href="#cb17-605" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb17-606"><a href="#cb17-606" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-607"><a href="#cb17-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-608"><a href="#cb17-608" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Saving everything in results</span></span>
-<span id="cb17-609"><a href="#cb17-609" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>rejInterim[index] <span class="ot">&lt;-</span> performance<span class="sc">$</span>rejInterim</span>
-<span id="cb17-610"><a href="#cb17-610" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>power[index] <span class="ot">&lt;-</span> performance<span class="sc">$</span>power</span>
-<span id="cb17-611"><a href="#cb17-611" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>futility[index] <span class="ot">&lt;-</span> performance<span class="sc">$</span>futility</span>
-<span id="cb17-612"><a href="#cb17-612" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>expectedSampleSize[index] <span class="ot">&lt;-</span> performance<span class="sc">$</span>expectedSampleSize</span>
-<span id="cb17-613"><a href="#cb17-613" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-614"><a href="#cb17-614" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save design characteristics as well</span></span>
-<span id="cb17-615"><a href="#cb17-615" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>interimInformation <span class="ot">&lt;-</span> cases<span class="sc">$</span>interimInformation[i]</span>
-<span id="cb17-616"><a href="#cb17-616" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>delayedInformation <span class="ot">&lt;-</span> cases<span class="sc">$</span>delayedInformation[i]</span>
-<span id="cb17-617"><a href="#cb17-617" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>alphaSpending <span class="ot">&lt;-</span> cases<span class="sc">$</span>alphaSpending[i]</span>
-<span id="cb17-618"><a href="#cb17-618" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>betaSpending <span class="ot">&lt;-</span> cases<span class="sc">$</span>betaSpending[i]</span>
-<span id="cb17-619"><a href="#cb17-619" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-620"><a href="#cb17-620" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Saving results in the results_all list</span></span>
-<span id="cb17-621"><a href="#cb17-621" aria-hidden="true" tabindex="-1"></a>    results_all[[i]] <span class="ot">&lt;-</span> results</span>
-<span id="cb17-622"><a href="#cb17-622" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-623"><a href="#cb17-623" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Naming of the entries in results_all</span></span>
-<span id="cb17-624"><a href="#cb17-624" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(results_all)[i] <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
-<span id="cb17-625"><a href="#cb17-625" aria-hidden="true" tabindex="-1"></a>        cases<span class="sc">$</span>alphaSpending[i],</span>
-<span id="cb17-626"><a href="#cb17-626" aria-hidden="true" tabindex="-1"></a>        cases<span class="sc">$</span>betaSpending[i], <span class="st">"I1="</span>, cases<span class="sc">$</span>interimInformation[i],</span>
-<span id="cb17-627"><a href="#cb17-627" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Id ="</span>, cases<span class="sc">$</span>delayedInformation[i]</span>
-<span id="cb17-628"><a href="#cb17-628" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-629"><a href="#cb17-629" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-630"><a href="#cb17-630" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-631"><a href="#cb17-631" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge results for all settings</span></span>
-<span id="cb17-632"><a href="#cb17-632" aria-hidden="true" tabindex="-1"></a>results_all <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, results_all)</span>
-<span id="cb17-633"><a href="#cb17-633" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-634"><a href="#cb17-634" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for Pocock-like spending function; Change to "asOF" for O'Brien-Fleming-like spending function</span></span>
-<span id="cb17-635"><a href="#cb17-635" aria-hidden="true" tabindex="-1"></a>results_all <span class="ot">&lt;-</span> results_all[results_all<span class="sc">$</span>alphaSpending <span class="sc">==</span> <span class="st">"asP"</span>, ]</span>
-<span id="cb17-636"><a href="#cb17-636" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-637"><a href="#cb17-637" aria-hidden="true" tabindex="-1"></a><span class="co"># Probabilities plot</span></span>
-<span id="cb17-638"><a href="#cb17-638" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(results_all, <span class="fu">aes</span>(<span class="at">x =</span> alternative, <span class="at">y =</span> power, <span class="at">color =</span> method)) <span class="sc">+</span></span>
-<span id="cb17-639"><a href="#cb17-639" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.9</span>, <span class="fu">aes</span>(<span class="at">linetype =</span> <span class="st">"Power"</span>)) <span class="sc">+</span></span>
-<span id="cb17-640"><a href="#cb17-640" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.9</span>, <span class="fu">aes</span>(</span>
-<span id="cb17-641"><a href="#cb17-641" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> alternative, <span class="at">y =</span> rejInterim,</span>
-<span id="cb17-642"><a href="#cb17-642" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> method, <span class="at">linetype =</span> <span class="st">"Rej.Interim"</span></span>
-<span id="cb17-643"><a href="#cb17-643" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">+</span></span>
-<span id="cb17-644"><a href="#cb17-644" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.9</span>, <span class="fu">aes</span>(</span>
-<span id="cb17-645"><a href="#cb17-645" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> alternative, <span class="at">y =</span> futility,</span>
-<span id="cb17-646"><a href="#cb17-646" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> method, <span class="at">linetype =</span> <span class="st">"Futility"</span></span>
-<span id="cb17-647"><a href="#cb17-647" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">+</span></span>
-<span id="cb17-648"><a href="#cb17-648" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(delayedInformation), <span class="at">cols =</span> <span class="fu">vars</span>(interimInformation)) <span class="sc">+</span></span>
-<span id="cb17-649"><a href="#cb17-649" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="fu">expression</span>(delta)) <span class="sc">+</span></span>
-<span id="cb17-650"><a href="#cb17-650" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Probability"</span>) <span class="sc">+</span></span>
-<span id="cb17-651"><a href="#cb17-651" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb17-652"><a href="#cb17-652" aria-hidden="true" tabindex="-1"></a>        <span class="at">limits =</span> <span class="fu">c</span>(<span class="fu">min</span>(alternative), <span class="fu">max</span>(alternative)),</span>
-<span id="cb17-653"><a href="#cb17-653" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">round</span>(<span class="fu">seq</span>(<span class="fu">min</span>(alternative), <span class="fu">max</span>(alternative), <span class="fl">0.2</span>), <span class="dv">3</span>),</span>
-<span id="cb17-654"><a href="#cb17-654" aria-hidden="true" tabindex="-1"></a>        <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>.,</span>
-<span id="cb17-655"><a href="#cb17-655" aria-hidden="true" tabindex="-1"></a>            <span class="at">name =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Interim Information "</span>, I[<span class="dv">1</span>])),</span>
-<span id="cb17-656"><a href="#cb17-656" aria-hidden="true" tabindex="-1"></a>            <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">labels =</span> <span class="cn">NULL</span></span>
-<span id="cb17-657"><a href="#cb17-657" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb17-658"><a href="#cb17-658" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb17-659"><a href="#cb17-659" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>.,</span>
-<span id="cb17-660"><a href="#cb17-660" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Amount of Pipeline Data "</span>, I[Delta[t]])),</span>
-<span id="cb17-661"><a href="#cb17-661" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">labels =</span> <span class="cn">NULL</span></span>
-<span id="cb17-662"><a href="#cb17-662" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">+</span></span>
-<span id="cb17-663"><a href="#cb17-663" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
-<span id="cb17-664"><a href="#cb17-664" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_linetype_manual</span>(</span>
-<span id="cb17-665"><a href="#cb17-665" aria-hidden="true" tabindex="-1"></a>        <span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb17-666"><a href="#cb17-666" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Power"</span> <span class="ot">=</span> <span class="st">"solid"</span>,</span>
-<span id="cb17-667"><a href="#cb17-667" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Rej.Interim"</span> <span class="ot">=</span> <span class="st">"dashed"</span>, <span class="st">"Futility"</span> <span class="ot">=</span> <span class="st">"dotted"</span></span>
-<span id="cb17-668"><a href="#cb17-668" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb17-669"><a href="#cb17-669" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">"Power"</span>, <span class="st">"Rej.Interim"</span>, <span class="st">"Futility"</span>)</span>
-<span id="cb17-670"><a href="#cb17-670" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb17-671"><a href="#cb17-671" aria-hidden="true" tabindex="-1"></a>    theme_grid</span>
-<span id="cb17-672"><a href="#cb17-672" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-673"><a href="#cb17-673" aria-hidden="true" tabindex="-1"></a><span class="co"># If the lines are overlapping, geom_path() can be used alternatively to</span></span>
-<span id="cb17-674"><a href="#cb17-674" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_line() to slightly shift the lines using position_dodge();</span></span>
-<span id="cb17-675"><a href="#cb17-675" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the code below in that case.</span></span>
-<span id="cb17-676"><a href="#cb17-676" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-677"><a href="#cb17-677" aria-hidden="true" tabindex="-1"></a><span class="co"># power &lt;- ggplot(results_all, aes(x = alternative, y = power, color = method)) +</span></span>
-<span id="cb17-678"><a href="#cb17-678" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_path(position = position_dodge(width = 0.02), size = 0.9, aes(linetype = "Power")) +</span></span>
-<span id="cb17-679"><a href="#cb17-679" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_path(position = position_dodge(width = 0.02), size = 0.9, aes(x = alternative, y = rejInterim, group = method, linetype = "Rej.Interim")) +</span></span>
-<span id="cb17-680"><a href="#cb17-680" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_path(position = position_dodge(width = 0.02), size = 0.9, aes(x = alternative, y = futility, group = method, linetype = "Futility")) +</span></span>
-<span id="cb17-681"><a href="#cb17-681" aria-hidden="true" tabindex="-1"></a><span class="co">#   facet_grid(rows = vars(delayedInformation), cols = vars(interimInformation)) +</span></span>
-<span id="cb17-682"><a href="#cb17-682" aria-hidden="true" tabindex="-1"></a><span class="co">#   xlab(expression(delta)) +</span></span>
-<span id="cb17-683"><a href="#cb17-683" aria-hidden="true" tabindex="-1"></a><span class="co">#   ylab("Probability") +</span></span>
-<span id="cb17-684"><a href="#cb17-684" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_x_continuous(limits = c(min(alternative), max(alternative)), breaks = round(seq(min(alternative),max(alternative),0.2),3),</span></span>
-<span id="cb17-685"><a href="#cb17-685" aria-hidden="true" tabindex="-1"></a><span class="co">#                      sec.axis = sec_axis(~ . , name = expression(paste("Interim Information ", I[1])), breaks = NULL, labels = NULL)) +</span></span>
-<span id="cb17-686"><a href="#cb17-686" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_y_continuous(sec.axis = sec_axis(~ . , name = expression(paste("Amount of Pipeline Data ", I[Delta[t]])), breaks = NULL, labels = NULL)) +</span></span>
-<span id="cb17-687"><a href="#cb17-687" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_color_manual(values = c("seagreen", "orange2", "blue")) +</span></span>
-<span id="cb17-688"><a href="#cb17-688" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_linetype_manual(values = c("Power" = "solid", "Rej.Interim" = "dashed", "Futility" = "dotted"), breaks = c("Power", "Rej.Interim", "Futility")) +</span></span>
-<span id="cb17-689"><a href="#cb17-689" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_grid</span></span>
-<span id="cb17-690"><a href="#cb17-690" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-691"><a href="#cb17-691" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected sample size plot</span></span>
-<span id="cb17-692"><a href="#cb17-692" aria-hidden="true" tabindex="-1"></a>eN <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(results_all, <span class="fu">aes</span>(<span class="at">x =</span> alternative, <span class="at">y =</span> expectedSampleSize, <span class="at">linetype =</span> method, <span class="at">color =</span> method)) <span class="sc">+</span></span>
-<span id="cb17-693"><a href="#cb17-693" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb17-694"><a href="#cb17-694" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(delayedInformation), <span class="at">cols =</span> <span class="fu">vars</span>(interimInformation), <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
-<span id="cb17-695"><a href="#cb17-695" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="fu">expression</span>(delta)) <span class="sc">+</span></span>
-<span id="cb17-696"><a href="#cb17-696" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"E[N]"</span>) <span class="sc">+</span></span>
-<span id="cb17-697"><a href="#cb17-697" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb17-698"><a href="#cb17-698" aria-hidden="true" tabindex="-1"></a>        <span class="at">limits =</span> <span class="fu">c</span>(<span class="fu">min</span>(alternative), <span class="fu">max</span>(alternative)), <span class="at">breaks =</span> <span class="fu">round</span>(<span class="fu">seq</span>(<span class="fu">min</span>(alternative), <span class="fu">max</span>(alternative), <span class="fl">0.2</span>), <span class="dv">3</span>),</span>
-<span id="cb17-699"><a href="#cb17-699" aria-hidden="true" tabindex="-1"></a>        <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>., <span class="at">name =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Interim Information "</span>, I[<span class="dv">1</span>])), <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">labels =</span> <span class="cn">NULL</span>)</span>
-<span id="cb17-700"><a href="#cb17-700" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb17-701"><a href="#cb17-701" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>., <span class="at">name =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Amount of Pipeline Data "</span>, I[Delta[t]])), <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">labels =</span> <span class="cn">NULL</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">160</span>, <span class="dv">400</span>)) <span class="sc">+</span></span>
-<span id="cb17-702"><a href="#cb17-702" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
-<span id="cb17-703"><a href="#cb17-703" aria-hidden="true" tabindex="-1"></a>    theme_grid</span>
-<span id="cb17-704"><a href="#cb17-704" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-705"><a href="#cb17-705" aria-hidden="true" tabindex="-1"></a><span class="co"># If the lines are overlapping, geom_path() can be used alternatively to geom_line() to slightly shift the lines using position_dodge() ; Uncomment the code below in that case</span></span>
-<span id="cb17-706"><a href="#cb17-706" aria-hidden="true" tabindex="-1"></a><span class="co"># eN &lt;- ggplot(results_all, aes(x = alternative, y = expectedSampleSize, linetype = method, color = method)) +</span></span>
-<span id="cb17-707"><a href="#cb17-707" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_path(position = position_dodge(width = 0.02), size = 0.9) +  # Using geom_path instead of geom_line for dodging</span></span>
-<span id="cb17-708"><a href="#cb17-708" aria-hidden="true" tabindex="-1"></a><span class="co">#   facet_grid(rows = vars(delayedInformation), cols = vars(interimInformation), scales = "free") +</span></span>
-<span id="cb17-709"><a href="#cb17-709" aria-hidden="true" tabindex="-1"></a><span class="co">#   xlab(expression(delta)) +</span></span>
-<span id="cb17-710"><a href="#cb17-710" aria-hidden="true" tabindex="-1"></a><span class="co">#   ylab("E[N]") +</span></span>
-<span id="cb17-711"><a href="#cb17-711" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_x_continuous(limits = c(min(alternative), max(alternative)), breaks = round(seq(min(alternative),max(alternative),0.2),3),</span></span>
-<span id="cb17-712"><a href="#cb17-712" aria-hidden="true" tabindex="-1"></a><span class="co">#                      sec.axis = sec_axis(~ . , name = expression(paste("Interim Information ", I[1])), breaks = NULL, labels = NULL)) +</span></span>
-<span id="cb17-713"><a href="#cb17-713" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_y_continuous(sec.axis = sec_axis(~ . , name = expression(paste("Amount of Pipeline Data ", I[Delta[t]])), breaks = NULL, labels = NULL), limits = c(160, 400)) +</span></span>
-<span id="cb17-714"><a href="#cb17-714" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_color_manual(values = c("seagreen", "orange2", "blue")) +</span></span>
-<span id="cb17-715"><a href="#cb17-715" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_grid</span></span>
-<span id="cb17-716"><a href="#cb17-716" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-717"><a href="#cb17-717" aria-hidden="true" tabindex="-1"></a>power</span>
-<span id="cb17-718"><a href="#cb17-718" aria-hidden="true" tabindex="-1"></a>eN</span>
-<span id="cb17-719"><a href="#cb17-719" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-720"><a href="#cb17-720" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-721"><a href="#cb17-721" aria-hidden="true" tabindex="-1"></a><span class="fu"># Simulation of Expected Sample Size</span></span>
-<span id="cb17-722"><a href="#cb17-722" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-723"><a href="#cb17-723" aria-hidden="true" tabindex="-1"></a>The actual sample size as well as the power are directly dependent upon the</span>
-<span id="cb17-724"><a href="#cb17-724" aria-hidden="true" tabindex="-1"></a>joint distribution of the test statistics. If the statistics are known to follow</span>
-<span id="cb17-725"><a href="#cb17-725" aria-hidden="true" tabindex="-1"></a>a normal distribution, formulas to do calculations of location components are</span>
-<span id="cb17-726"><a href="#cb17-726" aria-hidden="true" tabindex="-1"></a>readily available. In our manuscript, we argue that also variance components</span>
-<span id="cb17-727"><a href="#cb17-727" aria-hidden="true" tabindex="-1"></a>(such as $Var_{\delta}(N)$) should be considered in performance evaluation.</span>
-<span id="cb17-728"><a href="#cb17-728" aria-hidden="true" tabindex="-1"></a>However, no straightforward formulas for the calculation of the variance of</span>
-<span id="cb17-729"><a href="#cb17-729" aria-hidden="true" tabindex="-1"></a>sample size and power exist. Therefore, we use simulation to obtain an empirical</span>
-<span id="cb17-730"><a href="#cb17-730" aria-hidden="true" tabindex="-1"></a>distribution of the random variables.</span>
-<span id="cb17-731"><a href="#cb17-731" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-734"><a href="#cb17-734" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-735"><a href="#cb17-735" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
-<span id="cb17-736"><a href="#cb17-736" aria-hidden="true" tabindex="-1"></a>maxNumberOfSubjects <span class="ot">&lt;-</span> <span class="dv">400</span></span>
-<span id="cb17-737"><a href="#cb17-737" aria-hidden="true" tabindex="-1"></a>interimInformation <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb17-738"><a href="#cb17-738" aria-hidden="true" tabindex="-1"></a>delayedInformation <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb17-739"><a href="#cb17-739" aria-hidden="true" tabindex="-1"></a>alternative <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb17-740"><a href="#cb17-740" aria-hidden="true" tabindex="-1"></a>stDev <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb17-741"><a href="#cb17-741" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb17-742"><a href="#cb17-742" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-743"><a href="#cb17-743" aria-hidden="true" tabindex="-1"></a><span class="co"># Design parameters</span></span>
-<span id="cb17-744"><a href="#cb17-744" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.025</span></span>
-<span id="cb17-745"><a href="#cb17-745" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb17-746"><a href="#cb17-746" aria-hidden="true" tabindex="-1"></a>informationRates <span class="ot">&lt;-</span> <span class="fu">c</span>(interimInformation, <span class="dv">1</span>)</span>
-<span id="cb17-747"><a href="#cb17-747" aria-hidden="true" tabindex="-1"></a>typeOfDesign <span class="ot">&lt;-</span> <span class="st">"asOF"</span></span>
-<span id="cb17-748"><a href="#cb17-748" aria-hidden="true" tabindex="-1"></a>typeBetaSpending <span class="ot">&lt;-</span> <span class="st">"bsOF"</span></span>
-<span id="cb17-749"><a href="#cb17-749" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-750"><a href="#cb17-750" aria-hidden="true" tabindex="-1"></a><span class="co"># True means and covariance matrix</span></span>
-<span id="cb17-751"><a href="#cb17-751" aria-hidden="true" tabindex="-1"></a>informationRatesUponDelay <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb17-752"><a href="#cb17-752" aria-hidden="true" tabindex="-1"></a>    interimInformation,</span>
-<span id="cb17-753"><a href="#cb17-753" aria-hidden="true" tabindex="-1"></a>    interimInformation <span class="sc">+</span> delayedInformation, <span class="dv">1</span></span>
-<span id="cb17-754"><a href="#cb17-754" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-755"><a href="#cb17-755" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> alternative <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> stDev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span></span>
-<span id="cb17-756"><a href="#cb17-756" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sqrt</span>(informationRatesUponDelay <span class="sc">*</span> maxNumberOfSubjects <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb17-757"><a href="#cb17-757" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">getCovarianceFromInformation</span>(informationRatesUponDelay)</span>
-<span id="cb17-758"><a href="#cb17-758" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-759"><a href="#cb17-759" aria-hidden="true" tabindex="-1"></a><span class="co"># Data frame to store results</span></span>
-<span id="cb17-760"><a href="#cb17-760" aria-hidden="true" tabindex="-1"></a>resultsSim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb17-761"><a href="#cb17-761" aria-hidden="true" tabindex="-1"></a>    <span class="at">Method =</span> <span class="fu">character</span>(nsim),</span>
-<span id="cb17-762"><a href="#cb17-762" aria-hidden="true" tabindex="-1"></a>    <span class="at">Power =</span> <span class="fu">numeric</span>(nsim),</span>
-<span id="cb17-763"><a href="#cb17-763" aria-hidden="true" tabindex="-1"></a>    <span class="at">expectedNumberOfSubjects =</span> <span class="fu">numeric</span>(nsim),</span>
-<span id="cb17-764"><a href="#cb17-764" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb17-765"><a href="#cb17-765" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-766"><a href="#cb17-766" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-767"><a href="#cb17-767" aria-hidden="true" tabindex="-1"></a><span class="co"># Group-sequential design</span></span>
-<span id="cb17-768"><a href="#cb17-768" aria-hidden="true" tabindex="-1"></a>gsDesign <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
-<span id="cb17-769"><a href="#cb17-769" aria-hidden="true" tabindex="-1"></a>    <span class="at">kMax =</span> <span class="dv">2</span>,</span>
-<span id="cb17-770"><a href="#cb17-770" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
-<span id="cb17-771"><a href="#cb17-771" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
-<span id="cb17-772"><a href="#cb17-772" aria-hidden="true" tabindex="-1"></a>    <span class="at">informationRates =</span> informationRates,</span>
-<span id="cb17-773"><a href="#cb17-773" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> typeOfDesign,</span>
-<span id="cb17-774"><a href="#cb17-774" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> typeBetaSpending,</span>
-<span id="cb17-775"><a href="#cb17-775" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
-<span id="cb17-776"><a href="#cb17-776" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-777"><a href="#cb17-777" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-778"><a href="#cb17-778" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-779"><a href="#cb17-779" aria-hidden="true" tabindex="-1"></a><span class="co"># Delayed response group-sequential design</span></span>
-<span id="cb17-780"><a href="#cb17-780" aria-hidden="true" tabindex="-1"></a>drgsDesign <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
-<span id="cb17-781"><a href="#cb17-781" aria-hidden="true" tabindex="-1"></a>    <span class="at">kMax =</span> <span class="dv">2</span>,</span>
-<span id="cb17-782"><a href="#cb17-782" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
-<span id="cb17-783"><a href="#cb17-783" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
-<span id="cb17-784"><a href="#cb17-784" aria-hidden="true" tabindex="-1"></a>    <span class="at">informationRates =</span> informationRates,</span>
-<span id="cb17-785"><a href="#cb17-785" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> typeOfDesign,</span>
-<span id="cb17-786"><a href="#cb17-786" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> delayedInformation,</span>
-<span id="cb17-787"><a href="#cb17-787" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> typeBetaSpending,</span>
-<span id="cb17-788"><a href="#cb17-788" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
-<span id="cb17-789"><a href="#cb17-789" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-790"><a href="#cb17-790" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-791"><a href="#cb17-791" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-792"><a href="#cb17-792" aria-hidden="true" tabindex="-1"></a><span class="co"># Double Rejection Design</span></span>
-<span id="cb17-793"><a href="#cb17-793" aria-hidden="true" tabindex="-1"></a>drDesign <span class="ot">&lt;-</span> <span class="fu">getDoubleRejectionDesign</span>(</span>
-<span id="cb17-794"><a href="#cb17-794" aria-hidden="true" tabindex="-1"></a>    <span class="at">informationRates =</span> informationRates,</span>
-<span id="cb17-795"><a href="#cb17-795" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
-<span id="cb17-796"><a href="#cb17-796" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
-<span id="cb17-797"><a href="#cb17-797" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> typeOfDesign,</span>
-<span id="cb17-798"><a href="#cb17-798" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> typeBetaSpending,</span>
-<span id="cb17-799"><a href="#cb17-799" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> delayedInformation</span>
-<span id="cb17-800"><a href="#cb17-800" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-801"><a href="#cb17-801" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-802"><a href="#cb17-802" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">19032024</span></span>
+<span id="cb17-607"><a href="#cb17-607" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Saving everything in results</span></span>
+<span id="cb17-608"><a href="#cb17-608" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>rejInterim[index] <span class="ot">&lt;-</span> performance<span class="sc">$</span>rejInterim</span>
+<span id="cb17-609"><a href="#cb17-609" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>power[index] <span class="ot">&lt;-</span> performance<span class="sc">$</span>power</span>
+<span id="cb17-610"><a href="#cb17-610" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>futility[index] <span class="ot">&lt;-</span> performance<span class="sc">$</span>futility</span>
+<span id="cb17-611"><a href="#cb17-611" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>expectedSampleSize[index] <span class="ot">&lt;-</span> performance<span class="sc">$</span>expectedSampleSize</span>
+<span id="cb17-612"><a href="#cb17-612" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-613"><a href="#cb17-613" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save design characteristics as well</span></span>
+<span id="cb17-614"><a href="#cb17-614" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>interimInformation <span class="ot">&lt;-</span> cases<span class="sc">$</span>interimInformation[i]</span>
+<span id="cb17-615"><a href="#cb17-615" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>delayedInformation <span class="ot">&lt;-</span> cases<span class="sc">$</span>delayedInformation[i]</span>
+<span id="cb17-616"><a href="#cb17-616" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>alphaSpending <span class="ot">&lt;-</span> cases<span class="sc">$</span>alphaSpending[i]</span>
+<span id="cb17-617"><a href="#cb17-617" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>betaSpending <span class="ot">&lt;-</span> cases<span class="sc">$</span>betaSpending[i]</span>
+<span id="cb17-618"><a href="#cb17-618" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-619"><a href="#cb17-619" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Saving results in the results_all list</span></span>
+<span id="cb17-620"><a href="#cb17-620" aria-hidden="true" tabindex="-1"></a>    results_all[[i]] <span class="ot">&lt;-</span> results</span>
+<span id="cb17-621"><a href="#cb17-621" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-622"><a href="#cb17-622" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Naming of the entries in results_all</span></span>
+<span id="cb17-623"><a href="#cb17-623" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(results_all)[i] <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb17-624"><a href="#cb17-624" aria-hidden="true" tabindex="-1"></a>        cases<span class="sc">$</span>alphaSpending[i],</span>
+<span id="cb17-625"><a href="#cb17-625" aria-hidden="true" tabindex="-1"></a>        cases<span class="sc">$</span>betaSpending[i], <span class="st">"I1="</span>, cases<span class="sc">$</span>interimInformation[i],</span>
+<span id="cb17-626"><a href="#cb17-626" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Id ="</span>, cases<span class="sc">$</span>delayedInformation[i]</span>
+<span id="cb17-627"><a href="#cb17-627" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-628"><a href="#cb17-628" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-629"><a href="#cb17-629" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-630"><a href="#cb17-630" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge results for all settings</span></span>
+<span id="cb17-631"><a href="#cb17-631" aria-hidden="true" tabindex="-1"></a>results_all <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, results_all)</span>
+<span id="cb17-632"><a href="#cb17-632" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-633"><a href="#cb17-633" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for Pocock-like spending function; Change to "asOF" for O'Brien-Fleming-like spending function</span></span>
+<span id="cb17-634"><a href="#cb17-634" aria-hidden="true" tabindex="-1"></a>results_all <span class="ot">&lt;-</span> results_all[results_all<span class="sc">$</span>alphaSpending <span class="sc">==</span> <span class="st">"asP"</span>, ]</span>
+<span id="cb17-635"><a href="#cb17-635" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-636"><a href="#cb17-636" aria-hidden="true" tabindex="-1"></a><span class="co"># Probabilities plot</span></span>
+<span id="cb17-637"><a href="#cb17-637" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(results_all, <span class="fu">aes</span>(<span class="at">x =</span> alternative, <span class="at">y =</span> power, <span class="at">color =</span> method)) <span class="sc">+</span></span>
+<span id="cb17-638"><a href="#cb17-638" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.9</span>, <span class="fu">aes</span>(<span class="at">linetype =</span> <span class="st">"Power"</span>)) <span class="sc">+</span></span>
+<span id="cb17-639"><a href="#cb17-639" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.9</span>, <span class="fu">aes</span>(</span>
+<span id="cb17-640"><a href="#cb17-640" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> alternative, <span class="at">y =</span> rejInterim,</span>
+<span id="cb17-641"><a href="#cb17-641" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> method, <span class="at">linetype =</span> <span class="st">"Rej.Interim"</span></span>
+<span id="cb17-642"><a href="#cb17-642" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">+</span></span>
+<span id="cb17-643"><a href="#cb17-643" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.9</span>, <span class="fu">aes</span>(</span>
+<span id="cb17-644"><a href="#cb17-644" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> alternative, <span class="at">y =</span> futility,</span>
+<span id="cb17-645"><a href="#cb17-645" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> method, <span class="at">linetype =</span> <span class="st">"Futility"</span></span>
+<span id="cb17-646"><a href="#cb17-646" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">+</span></span>
+<span id="cb17-647"><a href="#cb17-647" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(delayedInformation), <span class="at">cols =</span> <span class="fu">vars</span>(interimInformation)) <span class="sc">+</span></span>
+<span id="cb17-648"><a href="#cb17-648" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="fu">expression</span>(delta)) <span class="sc">+</span></span>
+<span id="cb17-649"><a href="#cb17-649" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Probability"</span>) <span class="sc">+</span></span>
+<span id="cb17-650"><a href="#cb17-650" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb17-651"><a href="#cb17-651" aria-hidden="true" tabindex="-1"></a>        <span class="at">limits =</span> <span class="fu">c</span>(<span class="fu">min</span>(alternative), <span class="fu">max</span>(alternative)),</span>
+<span id="cb17-652"><a href="#cb17-652" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">round</span>(<span class="fu">seq</span>(<span class="fu">min</span>(alternative), <span class="fu">max</span>(alternative), <span class="fl">0.2</span>), <span class="dv">3</span>),</span>
+<span id="cb17-653"><a href="#cb17-653" aria-hidden="true" tabindex="-1"></a>        <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>.,</span>
+<span id="cb17-654"><a href="#cb17-654" aria-hidden="true" tabindex="-1"></a>            <span class="at">name =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Interim Information "</span>, I[<span class="dv">1</span>])),</span>
+<span id="cb17-655"><a href="#cb17-655" aria-hidden="true" tabindex="-1"></a>            <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">labels =</span> <span class="cn">NULL</span></span>
+<span id="cb17-656"><a href="#cb17-656" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb17-657"><a href="#cb17-657" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb17-658"><a href="#cb17-658" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>.,</span>
+<span id="cb17-659"><a href="#cb17-659" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Amount of Pipeline Data "</span>, I[Delta[t]])),</span>
+<span id="cb17-660"><a href="#cb17-660" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">labels =</span> <span class="cn">NULL</span></span>
+<span id="cb17-661"><a href="#cb17-661" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">+</span></span>
+<span id="cb17-662"><a href="#cb17-662" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb17-663"><a href="#cb17-663" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_linetype_manual</span>(</span>
+<span id="cb17-664"><a href="#cb17-664" aria-hidden="true" tabindex="-1"></a>        <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb17-665"><a href="#cb17-665" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Power"</span> <span class="ot">=</span> <span class="st">"solid"</span>,</span>
+<span id="cb17-666"><a href="#cb17-666" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Rej.Interim"</span> <span class="ot">=</span> <span class="st">"dashed"</span>, <span class="st">"Futility"</span> <span class="ot">=</span> <span class="st">"dotted"</span></span>
+<span id="cb17-667"><a href="#cb17-667" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb17-668"><a href="#cb17-668" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">"Power"</span>, <span class="st">"Rej.Interim"</span>, <span class="st">"Futility"</span>)</span>
+<span id="cb17-669"><a href="#cb17-669" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb17-670"><a href="#cb17-670" aria-hidden="true" tabindex="-1"></a>    theme_grid</span>
+<span id="cb17-671"><a href="#cb17-671" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-672"><a href="#cb17-672" aria-hidden="true" tabindex="-1"></a><span class="co"># If the lines are overlapping, geom_path() can be used alternatively to</span></span>
+<span id="cb17-673"><a href="#cb17-673" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_line() to slightly shift the lines using position_dodge();</span></span>
+<span id="cb17-674"><a href="#cb17-674" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the code below in that case.</span></span>
+<span id="cb17-675"><a href="#cb17-675" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-676"><a href="#cb17-676" aria-hidden="true" tabindex="-1"></a><span class="co"># power &lt;- ggplot(results_all, aes(x = alternative, y = power, color = method)) +</span></span>
+<span id="cb17-677"><a href="#cb17-677" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_path(position = position_dodge(width = 0.02), size = 0.9, aes(linetype = "Power")) +</span></span>
+<span id="cb17-678"><a href="#cb17-678" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_path(position = position_dodge(width = 0.02), size = 0.9, aes(x = alternative, y = rejInterim, group = method, linetype = "Rej.Interim")) +</span></span>
+<span id="cb17-679"><a href="#cb17-679" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_path(position = position_dodge(width = 0.02), size = 0.9, aes(x = alternative, y = futility, group = method, linetype = "Futility")) +</span></span>
+<span id="cb17-680"><a href="#cb17-680" aria-hidden="true" tabindex="-1"></a><span class="co">#   facet_grid(rows = vars(delayedInformation), cols = vars(interimInformation)) +</span></span>
+<span id="cb17-681"><a href="#cb17-681" aria-hidden="true" tabindex="-1"></a><span class="co">#   xlab(expression(delta)) +</span></span>
+<span id="cb17-682"><a href="#cb17-682" aria-hidden="true" tabindex="-1"></a><span class="co">#   ylab("Probability") +</span></span>
+<span id="cb17-683"><a href="#cb17-683" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_x_continuous(limits = c(min(alternative), max(alternative)), breaks = round(seq(min(alternative),max(alternative),0.2),3),</span></span>
+<span id="cb17-684"><a href="#cb17-684" aria-hidden="true" tabindex="-1"></a><span class="co">#                      sec.axis = sec_axis(~ . , name = expression(paste("Interim Information ", I[1])), breaks = NULL, labels = NULL)) +</span></span>
+<span id="cb17-685"><a href="#cb17-685" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_y_continuous(sec.axis = sec_axis(~ . , name = expression(paste("Amount of Pipeline Data ", I[Delta[t]])), breaks = NULL, labels = NULL)) +</span></span>
+<span id="cb17-686"><a href="#cb17-686" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_color_manual(values = c("seagreen", "orange2", "blue")) +</span></span>
+<span id="cb17-687"><a href="#cb17-687" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_linetype_manual(values = c("Power" = "solid", "Rej.Interim" = "dashed", "Futility" = "dotted"), breaks = c("Power", "Rej.Interim", "Futility")) +</span></span>
+<span id="cb17-688"><a href="#cb17-688" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_grid</span></span>
+<span id="cb17-689"><a href="#cb17-689" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-690"><a href="#cb17-690" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected sample size plot</span></span>
+<span id="cb17-691"><a href="#cb17-691" aria-hidden="true" tabindex="-1"></a>eN <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(results_all, <span class="fu">aes</span>(<span class="at">x =</span> alternative, <span class="at">y =</span> expectedSampleSize, <span class="at">linetype =</span> method, <span class="at">color =</span> method)) <span class="sc">+</span></span>
+<span id="cb17-692"><a href="#cb17-692" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb17-693"><a href="#cb17-693" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(delayedInformation), <span class="at">cols =</span> <span class="fu">vars</span>(interimInformation), <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb17-694"><a href="#cb17-694" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="fu">expression</span>(delta)) <span class="sc">+</span></span>
+<span id="cb17-695"><a href="#cb17-695" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"E[N]"</span>) <span class="sc">+</span></span>
+<span id="cb17-696"><a href="#cb17-696" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb17-697"><a href="#cb17-697" aria-hidden="true" tabindex="-1"></a>        <span class="at">limits =</span> <span class="fu">c</span>(<span class="fu">min</span>(alternative), <span class="fu">max</span>(alternative)), <span class="at">breaks =</span> <span class="fu">round</span>(<span class="fu">seq</span>(<span class="fu">min</span>(alternative), <span class="fu">max</span>(alternative), <span class="fl">0.2</span>), <span class="dv">3</span>),</span>
+<span id="cb17-698"><a href="#cb17-698" aria-hidden="true" tabindex="-1"></a>        <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>., <span class="at">name =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Interim Information "</span>, I[<span class="dv">1</span>])), <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">labels =</span> <span class="cn">NULL</span>)</span>
+<span id="cb17-699"><a href="#cb17-699" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb17-700"><a href="#cb17-700" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>., <span class="at">name =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Amount of Pipeline Data "</span>, I[Delta[t]])), <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">labels =</span> <span class="cn">NULL</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">160</span>, <span class="dv">400</span>)) <span class="sc">+</span></span>
+<span id="cb17-701"><a href="#cb17-701" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb17-702"><a href="#cb17-702" aria-hidden="true" tabindex="-1"></a>    theme_grid</span>
+<span id="cb17-703"><a href="#cb17-703" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-704"><a href="#cb17-704" aria-hidden="true" tabindex="-1"></a><span class="co"># If the lines are overlapping, geom_path() can be used alternatively to geom_line() to slightly shift the lines using position_dodge() ; Uncomment the code below in that case</span></span>
+<span id="cb17-705"><a href="#cb17-705" aria-hidden="true" tabindex="-1"></a><span class="co"># eN &lt;- ggplot(results_all, aes(x = alternative, y = expectedSampleSize, linetype = method, color = method)) +</span></span>
+<span id="cb17-706"><a href="#cb17-706" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_path(position = position_dodge(width = 0.02), size = 0.9) +  # Using geom_path instead of geom_line for dodging</span></span>
+<span id="cb17-707"><a href="#cb17-707" aria-hidden="true" tabindex="-1"></a><span class="co">#   facet_grid(rows = vars(delayedInformation), cols = vars(interimInformation), scales = "free") +</span></span>
+<span id="cb17-708"><a href="#cb17-708" aria-hidden="true" tabindex="-1"></a><span class="co">#   xlab(expression(delta)) +</span></span>
+<span id="cb17-709"><a href="#cb17-709" aria-hidden="true" tabindex="-1"></a><span class="co">#   ylab("E[N]") +</span></span>
+<span id="cb17-710"><a href="#cb17-710" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_x_continuous(limits = c(min(alternative), max(alternative)), breaks = round(seq(min(alternative),max(alternative),0.2),3),</span></span>
+<span id="cb17-711"><a href="#cb17-711" aria-hidden="true" tabindex="-1"></a><span class="co">#                      sec.axis = sec_axis(~ . , name = expression(paste("Interim Information ", I[1])), breaks = NULL, labels = NULL)) +</span></span>
+<span id="cb17-712"><a href="#cb17-712" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_y_continuous(sec.axis = sec_axis(~ . , name = expression(paste("Amount of Pipeline Data ", I[Delta[t]])), breaks = NULL, labels = NULL), limits = c(160, 400)) +</span></span>
+<span id="cb17-713"><a href="#cb17-713" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_color_manual(values = c("seagreen", "orange2", "blue")) +</span></span>
+<span id="cb17-714"><a href="#cb17-714" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_grid</span></span>
+<span id="cb17-715"><a href="#cb17-715" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-716"><a href="#cb17-716" aria-hidden="true" tabindex="-1"></a>power</span>
+<span id="cb17-717"><a href="#cb17-717" aria-hidden="true" tabindex="-1"></a>eN</span>
+<span id="cb17-718"><a href="#cb17-718" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-719"><a href="#cb17-719" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-720"><a href="#cb17-720" aria-hidden="true" tabindex="-1"></a><span class="fu"># Simulation of Expected Sample Size</span></span>
+<span id="cb17-721"><a href="#cb17-721" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-722"><a href="#cb17-722" aria-hidden="true" tabindex="-1"></a>The actual sample size as well as the power are directly dependent upon the</span>
+<span id="cb17-723"><a href="#cb17-723" aria-hidden="true" tabindex="-1"></a>joint distribution of the test statistics. If the statistics are known to follow</span>
+<span id="cb17-724"><a href="#cb17-724" aria-hidden="true" tabindex="-1"></a>a normal distribution, formulas to do calculations of location components are</span>
+<span id="cb17-725"><a href="#cb17-725" aria-hidden="true" tabindex="-1"></a>readily available. In our manuscript, we argue that also variance components</span>
+<span id="cb17-726"><a href="#cb17-726" aria-hidden="true" tabindex="-1"></a>(such as $Var_{\delta}(N)$) should be considered in performance evaluation.</span>
+<span id="cb17-727"><a href="#cb17-727" aria-hidden="true" tabindex="-1"></a>However, no straightforward formulas for the calculation of the variance of</span>
+<span id="cb17-728"><a href="#cb17-728" aria-hidden="true" tabindex="-1"></a>sample size and power exist. Therefore, we use simulation to obtain an empirical</span>
+<span id="cb17-729"><a href="#cb17-729" aria-hidden="true" tabindex="-1"></a>distribution of the random variables.</span>
+<span id="cb17-730"><a href="#cb17-730" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-733"><a href="#cb17-733" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-734"><a href="#cb17-734" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb17-735"><a href="#cb17-735" aria-hidden="true" tabindex="-1"></a>maxNumberOfSubjects <span class="ot">&lt;-</span> <span class="dv">400</span></span>
+<span id="cb17-736"><a href="#cb17-736" aria-hidden="true" tabindex="-1"></a>interimInformation <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb17-737"><a href="#cb17-737" aria-hidden="true" tabindex="-1"></a>delayedInformation <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb17-738"><a href="#cb17-738" aria-hidden="true" tabindex="-1"></a>alternative <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb17-739"><a href="#cb17-739" aria-hidden="true" tabindex="-1"></a>stDev <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb17-740"><a href="#cb17-740" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb17-741"><a href="#cb17-741" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-742"><a href="#cb17-742" aria-hidden="true" tabindex="-1"></a><span class="co"># Design parameters</span></span>
+<span id="cb17-743"><a href="#cb17-743" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.025</span></span>
+<span id="cb17-744"><a href="#cb17-744" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb17-745"><a href="#cb17-745" aria-hidden="true" tabindex="-1"></a>informationRates <span class="ot">&lt;-</span> <span class="fu">c</span>(interimInformation, <span class="dv">1</span>)</span>
+<span id="cb17-746"><a href="#cb17-746" aria-hidden="true" tabindex="-1"></a>typeOfDesign <span class="ot">&lt;-</span> <span class="st">"asOF"</span></span>
+<span id="cb17-747"><a href="#cb17-747" aria-hidden="true" tabindex="-1"></a>typeBetaSpending <span class="ot">&lt;-</span> <span class="st">"bsOF"</span></span>
+<span id="cb17-748"><a href="#cb17-748" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-749"><a href="#cb17-749" aria-hidden="true" tabindex="-1"></a><span class="co"># True means and covariance matrix</span></span>
+<span id="cb17-750"><a href="#cb17-750" aria-hidden="true" tabindex="-1"></a>informationRatesUponDelay <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb17-751"><a href="#cb17-751" aria-hidden="true" tabindex="-1"></a>    interimInformation,</span>
+<span id="cb17-752"><a href="#cb17-752" aria-hidden="true" tabindex="-1"></a>    interimInformation <span class="sc">+</span> delayedInformation, <span class="dv">1</span></span>
+<span id="cb17-753"><a href="#cb17-753" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-754"><a href="#cb17-754" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> alternative <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> stDev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span></span>
+<span id="cb17-755"><a href="#cb17-755" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sqrt</span>(informationRatesUponDelay <span class="sc">*</span> maxNumberOfSubjects <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb17-756"><a href="#cb17-756" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">getCovarianceFromInformation</span>(informationRatesUponDelay)</span>
+<span id="cb17-757"><a href="#cb17-757" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-758"><a href="#cb17-758" aria-hidden="true" tabindex="-1"></a><span class="co"># Data frame to store results</span></span>
+<span id="cb17-759"><a href="#cb17-759" aria-hidden="true" tabindex="-1"></a>resultsSim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb17-760"><a href="#cb17-760" aria-hidden="true" tabindex="-1"></a>    <span class="at">Method =</span> <span class="fu">character</span>(nsim),</span>
+<span id="cb17-761"><a href="#cb17-761" aria-hidden="true" tabindex="-1"></a>    <span class="at">Power =</span> <span class="fu">numeric</span>(nsim),</span>
+<span id="cb17-762"><a href="#cb17-762" aria-hidden="true" tabindex="-1"></a>    <span class="at">expectedNumberOfSubjects =</span> <span class="fu">numeric</span>(nsim),</span>
+<span id="cb17-763"><a href="#cb17-763" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-764"><a href="#cb17-764" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-765"><a href="#cb17-765" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-766"><a href="#cb17-766" aria-hidden="true" tabindex="-1"></a><span class="co"># Group-sequential design</span></span>
+<span id="cb17-767"><a href="#cb17-767" aria-hidden="true" tabindex="-1"></a>gsDesign <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb17-768"><a href="#cb17-768" aria-hidden="true" tabindex="-1"></a>    <span class="at">kMax =</span> <span class="dv">2</span>,</span>
+<span id="cb17-769"><a href="#cb17-769" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
+<span id="cb17-770"><a href="#cb17-770" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
+<span id="cb17-771"><a href="#cb17-771" aria-hidden="true" tabindex="-1"></a>    <span class="at">informationRates =</span> informationRates,</span>
+<span id="cb17-772"><a href="#cb17-772" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> typeOfDesign,</span>
+<span id="cb17-773"><a href="#cb17-773" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> typeBetaSpending,</span>
+<span id="cb17-774"><a href="#cb17-774" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-775"><a href="#cb17-775" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-776"><a href="#cb17-776" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-777"><a href="#cb17-777" aria-hidden="true" tabindex="-1"></a><span class="co"># Delayed response group-sequential design</span></span>
+<span id="cb17-778"><a href="#cb17-778" aria-hidden="true" tabindex="-1"></a>drgsDesign <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb17-779"><a href="#cb17-779" aria-hidden="true" tabindex="-1"></a>    <span class="at">kMax =</span> <span class="dv">2</span>,</span>
+<span id="cb17-780"><a href="#cb17-780" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
+<span id="cb17-781"><a href="#cb17-781" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
+<span id="cb17-782"><a href="#cb17-782" aria-hidden="true" tabindex="-1"></a>    <span class="at">informationRates =</span> informationRates,</span>
+<span id="cb17-783"><a href="#cb17-783" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> typeOfDesign,</span>
+<span id="cb17-784"><a href="#cb17-784" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> delayedInformation,</span>
+<span id="cb17-785"><a href="#cb17-785" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> typeBetaSpending,</span>
+<span id="cb17-786"><a href="#cb17-786" aria-hidden="true" tabindex="-1"></a>    <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-787"><a href="#cb17-787" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-788"><a href="#cb17-788" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-789"><a href="#cb17-789" aria-hidden="true" tabindex="-1"></a><span class="co"># Double Rejection Design</span></span>
+<span id="cb17-790"><a href="#cb17-790" aria-hidden="true" tabindex="-1"></a>drDesign <span class="ot">&lt;-</span> <span class="fu">getDoubleRejectionDesign</span>(</span>
+<span id="cb17-791"><a href="#cb17-791" aria-hidden="true" tabindex="-1"></a>    <span class="at">informationRates =</span> informationRates,</span>
+<span id="cb17-792"><a href="#cb17-792" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
+<span id="cb17-793"><a href="#cb17-793" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
+<span id="cb17-794"><a href="#cb17-794" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeOfDesign =</span> typeOfDesign,</span>
+<span id="cb17-795"><a href="#cb17-795" aria-hidden="true" tabindex="-1"></a>    <span class="at">typeBetaSpending =</span> typeBetaSpending,</span>
+<span id="cb17-796"><a href="#cb17-796" aria-hidden="true" tabindex="-1"></a>    <span class="at">delayedInformation =</span> delayedInformation</span>
+<span id="cb17-797"><a href="#cb17-797" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-798"><a href="#cb17-798" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-799"><a href="#cb17-799" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">19032024</span></span>
+<span id="cb17-800"><a href="#cb17-800" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-801"><a href="#cb17-801" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb17-802"><a href="#cb17-802" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(seed <span class="sc">+</span> i)</span>
 <span id="cb17-803"><a href="#cb17-803" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-804"><a href="#cb17-804" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
-<span id="cb17-805"><a href="#cb17-805" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(seed <span class="sc">+</span> i)</span>
-<span id="cb17-806"><a href="#cb17-806" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-807"><a href="#cb17-807" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulating multivariate normal random variables as test statistics</span></span>
-<span id="cb17-808"><a href="#cb17-808" aria-hidden="true" tabindex="-1"></a>    statistics <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">10000</span>, <span class="at">mean =</span> mu, <span class="at">sigma =</span> sigma)</span>
-<span id="cb17-809"><a href="#cb17-809" aria-hidden="true" tabindex="-1"></a>    Z1 <span class="ot">&lt;-</span> statistics[, <span class="dv">1</span>]</span>
-<span id="cb17-810"><a href="#cb17-810" aria-hidden="true" tabindex="-1"></a>    Z1tilde <span class="ot">&lt;-</span> statistics[, <span class="dv">2</span>]</span>
-<span id="cb17-811"><a href="#cb17-811" aria-hidden="true" tabindex="-1"></a>    Z12 <span class="ot">&lt;-</span> statistics[, <span class="dv">3</span>]</span>
-<span id="cb17-812"><a href="#cb17-812" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-813"><a href="#cb17-813" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulate power and expected sample size values for all designs</span></span>
-<span id="cb17-814"><a href="#cb17-814" aria-hidden="true" tabindex="-1"></a>    powerGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
-<span id="cb17-815"><a href="#cb17-815" aria-hidden="true" tabindex="-1"></a>        (gsDesign<span class="sc">$</span>futilityBounds <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
-<span id="cb17-816"><a href="#cb17-816" aria-hidden="true" tabindex="-1"></a>            Z12 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">2</span>]))</span>
-<span id="cb17-817"><a href="#cb17-817" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-818"><a href="#cb17-818" aria-hidden="true" tabindex="-1"></a>    eNGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span></span>
-<span id="cb17-819"><a href="#cb17-819" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (Z1 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">|</span></span>
-<span id="cb17-820"><a href="#cb17-820" aria-hidden="true" tabindex="-1"></a>            (Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>])) <span class="sc">+</span></span>
-<span id="cb17-821"><a href="#cb17-821" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (gsDesign<span class="sc">$</span>futilityBounds <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]))</span>
-<span id="cb17-822"><a href="#cb17-822" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-823"><a href="#cb17-823" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-824"><a href="#cb17-824" aria-hidden="true" tabindex="-1"></a>    powerDRGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
-<span id="cb17-825"><a href="#cb17-825" aria-hidden="true" tabindex="-1"></a>        Z1tilde <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
-<span id="cb17-826"><a href="#cb17-826" aria-hidden="true" tabindex="-1"></a>        (Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
-<span id="cb17-827"><a href="#cb17-827" aria-hidden="true" tabindex="-1"></a>            Z1tilde <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
-<span id="cb17-828"><a href="#cb17-828" aria-hidden="true" tabindex="-1"></a>        (drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span></span>
-<span id="cb17-829"><a href="#cb17-829" aria-hidden="true" tabindex="-1"></a>            Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
-<span id="cb17-830"><a href="#cb17-830" aria-hidden="true" tabindex="-1"></a>            Z12 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">2</span>]))</span>
-<span id="cb17-831"><a href="#cb17-831" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-832"><a href="#cb17-832" aria-hidden="true" tabindex="-1"></a>    eNDRGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span> maxNumberOfSubjects <span class="sc">*</span></span>
-<span id="cb17-833"><a href="#cb17-833" aria-hidden="true" tabindex="-1"></a>        ((Z1 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
-<span id="cb17-834"><a href="#cb17-834" aria-hidden="true" tabindex="-1"></a>            (Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>])) <span class="sc">+</span> maxNumberOfSubjects <span class="sc">*</span></span>
-<span id="cb17-835"><a href="#cb17-835" aria-hidden="true" tabindex="-1"></a>            (drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]))</span>
+<span id="cb17-804"><a href="#cb17-804" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulating multivariate normal random variables as test statistics</span></span>
+<span id="cb17-805"><a href="#cb17-805" aria-hidden="true" tabindex="-1"></a>    statistics <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">10000</span>, <span class="at">mean =</span> mu, <span class="at">sigma =</span> sigma)</span>
+<span id="cb17-806"><a href="#cb17-806" aria-hidden="true" tabindex="-1"></a>    Z1 <span class="ot">&lt;-</span> statistics[, <span class="dv">1</span>]</span>
+<span id="cb17-807"><a href="#cb17-807" aria-hidden="true" tabindex="-1"></a>    Z1tilde <span class="ot">&lt;-</span> statistics[, <span class="dv">2</span>]</span>
+<span id="cb17-808"><a href="#cb17-808" aria-hidden="true" tabindex="-1"></a>    Z12 <span class="ot">&lt;-</span> statistics[, <span class="dv">3</span>]</span>
+<span id="cb17-809"><a href="#cb17-809" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-810"><a href="#cb17-810" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulate power and expected sample size values for all designs</span></span>
+<span id="cb17-811"><a href="#cb17-811" aria-hidden="true" tabindex="-1"></a>    powerGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
+<span id="cb17-812"><a href="#cb17-812" aria-hidden="true" tabindex="-1"></a>        (gsDesign<span class="sc">$</span>futilityBounds <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
+<span id="cb17-813"><a href="#cb17-813" aria-hidden="true" tabindex="-1"></a>            Z12 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">2</span>]))</span>
+<span id="cb17-814"><a href="#cb17-814" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-815"><a href="#cb17-815" aria-hidden="true" tabindex="-1"></a>    eNGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span></span>
+<span id="cb17-816"><a href="#cb17-816" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (Z1 <span class="sc">&gt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">|</span></span>
+<span id="cb17-817"><a href="#cb17-817" aria-hidden="true" tabindex="-1"></a>            (Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb17-818"><a href="#cb17-818" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (gsDesign<span class="sc">$</span>futilityBounds <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> gsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]))</span>
+<span id="cb17-819"><a href="#cb17-819" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-820"><a href="#cb17-820" aria-hidden="true" tabindex="-1"></a>    powerDRGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
+<span id="cb17-821"><a href="#cb17-821" aria-hidden="true" tabindex="-1"></a>        Z1tilde <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
+<span id="cb17-822"><a href="#cb17-822" aria-hidden="true" tabindex="-1"></a>        (Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
+<span id="cb17-823"><a href="#cb17-823" aria-hidden="true" tabindex="-1"></a>            Z1tilde <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
+<span id="cb17-824"><a href="#cb17-824" aria-hidden="true" tabindex="-1"></a>        (drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span></span>
+<span id="cb17-825"><a href="#cb17-825" aria-hidden="true" tabindex="-1"></a>            Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>] <span class="sc">&amp;</span></span>
+<span id="cb17-826"><a href="#cb17-826" aria-hidden="true" tabindex="-1"></a>            Z12 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>decisionCriticalValues[<span class="dv">2</span>]))</span>
+<span id="cb17-827"><a href="#cb17-827" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-828"><a href="#cb17-828" aria-hidden="true" tabindex="-1"></a>    eNDRGSD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span> maxNumberOfSubjects <span class="sc">*</span></span>
+<span id="cb17-829"><a href="#cb17-829" aria-hidden="true" tabindex="-1"></a>        ((Z1 <span class="sc">&gt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]) <span class="sc">|</span></span>
+<span id="cb17-830"><a href="#cb17-830" aria-hidden="true" tabindex="-1"></a>            (Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>])) <span class="sc">+</span> maxNumberOfSubjects <span class="sc">*</span></span>
+<span id="cb17-831"><a href="#cb17-831" aria-hidden="true" tabindex="-1"></a>            (drgsDesign<span class="sc">$</span>futilityBounds[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drgsDesign<span class="sc">$</span>criticalValues[<span class="dv">1</span>]))</span>
+<span id="cb17-832"><a href="#cb17-832" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-833"><a href="#cb17-833" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-834"><a href="#cb17-834" aria-hidden="true" tabindex="-1"></a>    powerDRD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">&amp;</span> Z1tilde <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">2</span>]) <span class="sc">|</span></span>
+<span id="cb17-835"><a href="#cb17-835" aria-hidden="true" tabindex="-1"></a>        (drDesign<span class="sc">$</span>lower[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">&amp;</span> Z12 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">3</span>]))</span>
 <span id="cb17-836"><a href="#cb17-836" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-837"><a href="#cb17-837" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-838"><a href="#cb17-838" aria-hidden="true" tabindex="-1"></a>    powerDRD <span class="ot">&lt;-</span> <span class="fu">mean</span>((Z1 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">&amp;</span> Z1tilde <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">2</span>]) <span class="sc">|</span></span>
-<span id="cb17-839"><a href="#cb17-839" aria-hidden="true" tabindex="-1"></a>        (drDesign<span class="sc">$</span>lower[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">&amp;</span> Z12 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">3</span>]))</span>
+<span id="cb17-837"><a href="#cb17-837" aria-hidden="true" tabindex="-1"></a>    enDRD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span> maxNumberOfSubjects <span class="sc">*</span></span>
+<span id="cb17-838"><a href="#cb17-838" aria-hidden="true" tabindex="-1"></a>        (Z1 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">|</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>lower[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb17-839"><a href="#cb17-839" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (drDesign<span class="sc">$</span>lower[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>]))</span>
 <span id="cb17-840"><a href="#cb17-840" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-841"><a href="#cb17-841" aria-hidden="true" tabindex="-1"></a>    enDRD <span class="ot">&lt;-</span> <span class="fu">mean</span>(informationRatesUponDelay[<span class="dv">2</span>] <span class="sc">*</span> maxNumberOfSubjects <span class="sc">*</span></span>
-<span id="cb17-842"><a href="#cb17-842" aria-hidden="true" tabindex="-1"></a>        (Z1 <span class="sc">&gt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>] <span class="sc">|</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>lower[<span class="dv">1</span>]) <span class="sc">+</span></span>
-<span id="cb17-843"><a href="#cb17-843" aria-hidden="true" tabindex="-1"></a>        maxNumberOfSubjects <span class="sc">*</span> (drDesign<span class="sc">$</span>lower[<span class="dv">1</span>] <span class="sc">&lt;</span> Z1 <span class="sc">&amp;</span> Z1 <span class="sc">&lt;</span> drDesign<span class="sc">$</span>upper[<span class="dv">1</span>]))</span>
-<span id="cb17-844"><a href="#cb17-844" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-845"><a href="#cb17-845" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-846"><a href="#cb17-846" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save results in data frame</span></span>
-<span id="cb17-847"><a href="#cb17-847" aria-hidden="true" tabindex="-1"></a>    resultsSim[i, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, powerGSD, eNGSD)</span>
-<span id="cb17-848"><a href="#cb17-848" aria-hidden="true" tabindex="-1"></a>    resultsSim[i <span class="sc">+</span> nsim, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"drgsDesign"</span>, powerDRGSD, eNDRGSD)</span>
-<span id="cb17-849"><a href="#cb17-849" aria-hidden="true" tabindex="-1"></a>    resultsSim[i <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> nsim, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"drDesign"</span>, powerDRD, enDRD)</span>
-<span id="cb17-850"><a href="#cb17-850" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-851"><a href="#cb17-851" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-852"><a href="#cb17-852" aria-hidden="true" tabindex="-1"></a><span class="co"># Save results</span></span>
-<span id="cb17-853"><a href="#cb17-853" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>Method <span class="ot">&lt;-</span> <span class="fu">factor</span>(resultsSim<span class="sc">$</span>Method,</span>
-<span id="cb17-854"><a href="#cb17-854" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>),</span>
-<span id="cb17-855"><a href="#cb17-855" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
-<span id="cb17-856"><a href="#cb17-856" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-857"><a href="#cb17-857" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>Power <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(resultsSim<span class="sc">$</span>Power)</span>
-<span id="cb17-858"><a href="#cb17-858" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>eN <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(resultsSim<span class="sc">$</span>expectedNumberOfSubjects)</span>
-<span id="cb17-859"><a href="#cb17-859" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-860"><a href="#cb17-860" aria-hidden="true" tabindex="-1"></a><span class="co"># Theme for plotting simulation results</span></span>
-<span id="cb17-861"><a href="#cb17-861" aria-hidden="true" tabindex="-1"></a>theme_sim <span class="ot">&lt;-</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb17-862"><a href="#cb17-862" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb17-863"><a href="#cb17-863" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb17-864"><a href="#cb17-864" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb17-865"><a href="#cb17-865" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"italic"</span>),</span>
-<span id="cb17-866"><a href="#cb17-866" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
-<span id="cb17-867"><a href="#cb17-867" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"cm"</span>),</span>
-<span id="cb17-868"><a href="#cb17-868" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
-<span id="cb17-869"><a href="#cb17-869" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
-<span id="cb17-870"><a href="#cb17-870" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb17-871"><a href="#cb17-871" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>),</span>
-<span id="cb17-872"><a href="#cb17-872" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>)</span>
-<span id="cb17-873"><a href="#cb17-873" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-874"><a href="#cb17-874" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-875"><a href="#cb17-875" aria-hidden="true" tabindex="-1"></a><span class="co"># Power simulation</span></span>
-<span id="cb17-876"><a href="#cb17-876" aria-hidden="true" tabindex="-1"></a>power_sim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(resultsSim, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> Power, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
-<span id="cb17-877"><a href="#cb17-877" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb17-878"><a href="#cb17-878" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>)) <span class="sc">+</span></span>
-<span id="cb17-879"><a href="#cb17-879" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">0.85</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">0.83</span>, <span class="fl">0.84</span>, <span class="fl">0.85</span>)) <span class="sc">+</span></span>
-<span id="cb17-880"><a href="#cb17-880" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb17-881"><a href="#cb17-881" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Simulated Power"</span>) <span class="sc">+</span></span>
-<span id="cb17-882"><a href="#cb17-882" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen4"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
-<span id="cb17-883"><a href="#cb17-883" aria-hidden="true" tabindex="-1"></a>    theme_sim</span>
-<span id="cb17-884"><a href="#cb17-884" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-885"><a href="#cb17-885" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected sample size simulation</span></span>
-<span id="cb17-886"><a href="#cb17-886" aria-hidden="true" tabindex="-1"></a>eN_sim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(resultsSim, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> eN, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
-<span id="cb17-887"><a href="#cb17-887" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb17-888"><a href="#cb17-888" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>)) <span class="sc">+</span></span>
-<span id="cb17-889"><a href="#cb17-889" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">366</span>, <span class="dv">372</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">366</span>, <span class="dv">368</span>, <span class="dv">370</span>, <span class="dv">372</span>)) <span class="sc">+</span></span>
-<span id="cb17-890"><a href="#cb17-890" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb17-891"><a href="#cb17-891" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"E[N]"</span>) <span class="sc">+</span></span>
-<span id="cb17-892"><a href="#cb17-892" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen4"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
-<span id="cb17-893"><a href="#cb17-893" aria-hidden="true" tabindex="-1"></a>    theme_sim</span>
-<span id="cb17-894"><a href="#cb17-894" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-895"><a href="#cb17-895" aria-hidden="true" tabindex="-1"></a>power_sim</span>
-<span id="cb17-896"><a href="#cb17-896" aria-hidden="true" tabindex="-1"></a>eN_sim</span>
-<span id="cb17-897"><a href="#cb17-897" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-841"><a href="#cb17-841" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save results in data frame</span></span>
+<span id="cb17-842"><a href="#cb17-842" aria-hidden="true" tabindex="-1"></a>    resultsSim[i, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, powerGSD, eNGSD)</span>
+<span id="cb17-843"><a href="#cb17-843" aria-hidden="true" tabindex="-1"></a>    resultsSim[i <span class="sc">+</span> nsim, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"drgsDesign"</span>, powerDRGSD, eNDRGSD)</span>
+<span id="cb17-844"><a href="#cb17-844" aria-hidden="true" tabindex="-1"></a>    resultsSim[i <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> nsim, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"drDesign"</span>, powerDRD, enDRD)</span>
+<span id="cb17-845"><a href="#cb17-845" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-846"><a href="#cb17-846" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-847"><a href="#cb17-847" aria-hidden="true" tabindex="-1"></a><span class="co"># Save results</span></span>
+<span id="cb17-848"><a href="#cb17-848" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>Method <span class="ot">&lt;-</span> <span class="fu">factor</span>(resultsSim<span class="sc">$</span>Method,</span>
+<span id="cb17-849"><a href="#cb17-849" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>),</span>
+<span id="cb17-850"><a href="#cb17-850" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-851"><a href="#cb17-851" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-852"><a href="#cb17-852" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>Power <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(resultsSim<span class="sc">$</span>Power)</span>
+<span id="cb17-853"><a href="#cb17-853" aria-hidden="true" tabindex="-1"></a>resultsSim<span class="sc">$</span>eN <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(resultsSim<span class="sc">$</span>expectedNumberOfSubjects)</span>
+<span id="cb17-854"><a href="#cb17-854" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-855"><a href="#cb17-855" aria-hidden="true" tabindex="-1"></a><span class="co"># Theme for plotting simulation results</span></span>
+<span id="cb17-856"><a href="#cb17-856" aria-hidden="true" tabindex="-1"></a>theme_sim <span class="ot">&lt;-</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb17-857"><a href="#cb17-857" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb17-858"><a href="#cb17-858" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb17-859"><a href="#cb17-859" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-860"><a href="#cb17-860" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"italic"</span>),</span>
+<span id="cb17-861"><a href="#cb17-861" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb17-862"><a href="#cb17-862" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"cm"</span>),</span>
+<span id="cb17-863"><a href="#cb17-863" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb17-864"><a href="#cb17-864" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb17-865"><a href="#cb17-865" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb17-866"><a href="#cb17-866" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb17-867"><a href="#cb17-867" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb17-868"><a href="#cb17-868" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-869"><a href="#cb17-869" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-870"><a href="#cb17-870" aria-hidden="true" tabindex="-1"></a><span class="co"># Power simulation</span></span>
+<span id="cb17-871"><a href="#cb17-871" aria-hidden="true" tabindex="-1"></a>power_sim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(resultsSim, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> Power, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
+<span id="cb17-872"><a href="#cb17-872" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb17-873"><a href="#cb17-873" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>)) <span class="sc">+</span></span>
+<span id="cb17-874"><a href="#cb17-874" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">0.85</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">0.83</span>, <span class="fl">0.84</span>, <span class="fl">0.85</span>)) <span class="sc">+</span></span>
+<span id="cb17-875"><a href="#cb17-875" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb17-876"><a href="#cb17-876" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Simulated Power"</span>) <span class="sc">+</span></span>
+<span id="cb17-877"><a href="#cb17-877" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen4"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb17-878"><a href="#cb17-878" aria-hidden="true" tabindex="-1"></a>    theme_sim</span>
+<span id="cb17-879"><a href="#cb17-879" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-880"><a href="#cb17-880" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected sample size simulation</span></span>
+<span id="cb17-881"><a href="#cb17-881" aria-hidden="true" tabindex="-1"></a>eN_sim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(resultsSim, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> eN, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
+<span id="cb17-882"><a href="#cb17-882" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb17-883"><a href="#cb17-883" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gsDesign"</span>, <span class="st">"drgsDesign"</span>, <span class="st">"drDesign"</span>)) <span class="sc">+</span></span>
+<span id="cb17-884"><a href="#cb17-884" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">366</span>, <span class="dv">372</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">366</span>, <span class="dv">368</span>, <span class="dv">370</span>, <span class="dv">372</span>)) <span class="sc">+</span></span>
+<span id="cb17-885"><a href="#cb17-885" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb17-886"><a href="#cb17-886" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"E[N]"</span>) <span class="sc">+</span></span>
+<span id="cb17-887"><a href="#cb17-887" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"seagreen4"</span>, <span class="st">"orange2"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb17-888"><a href="#cb17-888" aria-hidden="true" tabindex="-1"></a>    theme_sim</span>
+<span id="cb17-889"><a href="#cb17-889" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-890"><a href="#cb17-890" aria-hidden="true" tabindex="-1"></a>power_sim</span>
+<span id="cb17-891"><a href="#cb17-891" aria-hidden="true" tabindex="-1"></a>eN_sim</span>
+<span id="cb17-892"><a href="#cb17-892" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-893"><a href="#cb17-893" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-894"><a href="#cb17-894" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb17-895"><a href="#cb17-895" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-896"><a href="#cb17-896" aria-hidden="true" tabindex="-1"></a>System: rpact <span class="in">`r  packageVersion("rpact")`</span>, <span class="in">`r R.version.string`</span>,</span>
+<span id="cb17-897"><a href="#cb17-897" aria-hidden="true" tabindex="-1"></a>platform: <span class="in">`r R.version$platform`</span></span>
+<span id="cb17-898"><a href="#cb17-898" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-899"><a href="#cb17-899" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = FALSE, results = 'asis'}</span></span>
+<span id="cb17-900"><a href="#cb17-900" aria-hidden="true" tabindex="-1"></a><span class="in">printCitation()</span></span>
+<span id="cb17-901"><a href="#cb17-901" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
