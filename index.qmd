@@ -66,9 +66,9 @@ if (!require(mvtnorm)) {
     install.packages("mvtnorm")
 }
 
-source("R/util.R")
-source("R/getDoubleRejectionDesign.R")
-source("R/getPowerMeansDoubleRejectionApproach.R")
+source("R/utilities.R")
+source("R/double_rejection_design.R")
+source("R/power_means_double_rejection_approach.R")
 ```
 
 # Initialize the different designs
@@ -101,7 +101,7 @@ betaSpending <- "bsP"
 At first, we consider a standard group-sequential design with a nonbinding
 futility boundary. In this option, we pretend as if there were no pipeline data
 since those would not be used during testing. This is done by setting
-`delayedInformation = 0` and `bindingFutility = F`.
+`delayedInformation = 0` and `bindingFutility = FALSE`.
 
 ```{r}
 #| warning: false
@@ -115,7 +115,7 @@ gsDesign <- getDesignGroupSequential(
     typeOfDesign = alphaSpending,
     typeBetaSpending = betaSpending,
     delayedInformation = 0,
-    bindingFutility = F
+    bindingFutility = FALSE
 )
 summary(gsDesign)
 ```
@@ -125,7 +125,7 @@ summary(gsDesign)
 Secondly, we initialize the delayed response group-sequential design by Hampson
 and Jennison (2013). We, however, propose a slightly modified version which is
 such that the lower boundary is nonbinding. We initialize this design by setting
-`delayedInformation = 0.3` and, again, `bindingFutility = F`.
+`delayedInformation = 0.3` and, again, `bindingFutility = FALSE`.
 
 ```{r}
 #| warning: false
@@ -139,7 +139,7 @@ drgsDesign <- getDesignGroupSequential(
     typeOfDesign = alphaSpending,
     typeBetaSpending = betaSpending,
     delayedInformation = delayedInformation,
-    bindingFutility = F
+    bindingFutility = FALSE
 )
 
 summary(drgsDesign)
@@ -495,7 +495,7 @@ for (i in 1:nCases) {
         typeOfDesign = cases$alphaSpending[i],
         typeBetaSpending = cases$betaSpending[i],
         delayedInformation = 0,
-        bindingFutility = F
+        bindingFutility = FALSE
     )
 
     index <- 1:nAlternative
@@ -526,7 +526,7 @@ for (i in 1:nCases) {
         typeOfDesign = cases$alphaSpending[i],
         typeBetaSpending = cases$betaSpending[i],
         delayedInformation = cases$delayedInformation[i],
-        bindingFutility = F
+        bindingFutility = FALSE
     )
 
     index <- (1 + nAlternative):(2 * nAlternative)
@@ -579,7 +579,6 @@ for (i in 1:nCases) {
         stDev = stDev,
         maxNumberOfSubjects = maxNumberOfSubjects
     )
-
 
     # Saving everything in results
     results$rejInterim[index] <- performance$rejInterim
@@ -749,7 +748,6 @@ gsDesign <- getDesignGroupSequential(
     bindingFutility = FALSE
 )
 
-
 # Delayed response group-sequential design
 drgsDesign <- getDesignGroupSequential(
     kMax = 2,
@@ -761,7 +759,6 @@ drgsDesign <- getDesignGroupSequential(
     typeBetaSpending = typeBetaSpending,
     bindingFutility = FALSE
 )
-
 
 # Double Rejection Design
 drDesign <- getDoubleRejectionDesign(
@@ -794,7 +791,6 @@ for (i in 1:nsim) {
             (Z1 < gsDesign$futilityBounds[1])) +
         maxNumberOfSubjects * (gsDesign$futilityBounds < Z1 & Z1 < gsDesign$criticalValues[1]))
 
-
     powerDRGSD <- mean((Z1 > drgsDesign$criticalValues[1] &
         Z1tilde > drgsDesign$decisionCriticalValues[1]) |
         (Z1 < drgsDesign$futilityBounds[1] &
@@ -815,7 +811,6 @@ for (i in 1:nsim) {
     enDRD <- mean(informationRatesUponDelay[2] * maxNumberOfSubjects *
         (Z1 > drDesign$upper[1] | Z1 < drDesign$lower[1]) +
         maxNumberOfSubjects * (drDesign$lower[1] < Z1 & Z1 < drDesign$upper[1]))
-
 
     # Save results in data frame
     resultsSim[i, ] <- c("gsDesign", powerGSD, eNGSD)
@@ -868,4 +863,13 @@ eN_sim <- ggplot(resultsSim, aes(x = Method, y = eN, fill = Method)) +
 
 power_sim
 eN_sim
+```
+
+***
+
+System: rpact `r  packageVersion("rpact")`, `r R.version.string`,
+platform: `r R.version$platform`
+
+```{r, echo = FALSE, results = 'asis'}
+printCitation()
 ```
