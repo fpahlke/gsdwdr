@@ -1,0 +1,22 @@
+Package: gsdwdr
+Type: Package
+Version: 0.1-0
+Date: 2024-09-03
+Title: gs designs with delayed responses
+Authors@R: c(
+    person(
+    	given = "Stephen", 
+    	family = "Schueuerhuis", 
+    	email = "stephen.schueuerhuis@charite.de",
+    	role = c("aut")
+	),
+    person(
+    	given = "Friedrich", 
+    	family = "Pahlke", 
+    	email = "friedrich.pahlke@rpact.com",
+    	comment = c(ORCID = "0000-0003-2105-2582"), 
+    	role = c("ctb", "cre")
+    ))
+Maintainer: fpahlke <friedrich.pahlke@rpact.com>
+Description: Two-stage group-sequential designs with delayed responses
+License: MIT
