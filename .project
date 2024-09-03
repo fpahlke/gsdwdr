@@ -14,5 +14,6 @@
 	<natures>
 		<nature>org.eclipse.statet.ide.resourceProjects.Statet</nature>
 		<nature>org.eclipse.statet.r.resourceProjects.R</nature>
+		<nature>org.eclipse.statet.r.resourceProjects.RPkg</nature>
 	</natures>
 </projectDescription>
