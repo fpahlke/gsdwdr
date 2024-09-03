@@ -32,30 +32,37 @@ options("rpact.summary.justify" = "left")
 
 # Introduction
 
-This document provides code that is used to produce the results from the manuscript *"Two-stage group-sequential designs with delayed responses \-- what is the point of applying corresponding methods?"*. Most functionalities used to produce the results are directly taken from the R package `rpact`.
+This document provides code that is used to produce the results from the
+manuscript *"Two-stage group-sequential designs with delayed responses \-- what
+is the point of applying corresponding methods?"*. Most functionalities used to
+produce the results are directly taken from the R package `rpact`.
 
 # Load packages
 
-At first, the packages `rpact`, `ggplot2`, `mnormt` and `mvtnorm` need to be installed and loaded. The package `mnormt` is used to evaluate probabilities of multivariate normal distributions. The package `mvtnorm` is used to simulate data from a multivariate normal distribution. Additionally, some own written functions are imported.
+At first, the packages `rpact`, `ggplot2`, `mnormt` and `mvtnorm` need to be
+installed and loaded. The package `mnormt` is used to evaluate probabilities of
+multivariate normal distributions. The package `mvtnorm` is used to simulate
+data from a multivariate normal distribution. Additionally, some own written
+functions are imported.
 
 ```{r}
 # Main package
-if(!require(rpact)) {
+if (!require(rpact)) {
     install.packages("rpact")
 }
 
 # For plotting
-if(!require(ggplot2)) {
+if (!require(ggplot2)) {
     install.packages("ggplot2")
 }
 
 # For multivariate normal probabilities
-if(!require(mnormt)) {
+if (!require(mnormt)) {
     install.packages("mnormt")
 }
 
 # For simulation of test statistics
-if(!require(mvtnorm)) {
+if (!require(mvtnorm)) {
     install.packages("mvtnorm")
 }
 
@@ -70,7 +77,11 @@ At first, we illustrate how to initialize the different designs under considerat
 
 # Design Characteristics
 
-We consider a two-stage group-sequential design with $\alpha$- as well as $\beta$-spending according to Pocock-type spending functions. During the planned interim analysis at $I_1 = 0.5$, we assume that there is still $I_{\Delta_t} = 0.3$ of information outstanding. Different designs can be obtained by changing the inputs.
+We consider a two-stage group-sequential design with $\alpha$- as well as
+$\beta$-spending according to Pocock-type spending functions. During the planned
+interim analysis at $I_1 = 0.5$, we assume that there is still
+$I_{\Delta_t} = 0.3$ of information outstanding. Different designs can be
+obtained by changing the inputs.
 
 ```{r}
 #| echo: true
@@ -83,86 +94,97 @@ betaSpending <- "bsP"
 # For Table 4
 # informationRates <- c(0.29,1)
 # delayedInformation <- 0.3
-  
 ```
 
 ## Standard group-sequential design
 
-At first, we consider a standard group-sequential design with a nonbinding futility boundary. In this option, we pretend as if there were no pipeline data since those would not be used during testing. This is done by setting `delayedInformation = 0` and `bindingFutility = F`.
+At first, we consider a standard group-sequential design with a nonbinding
+futility boundary. In this option, we pretend as if there were no pipeline data
+since those would not be used during testing. This is done by setting
+`delayedInformation = 0` and `bindingFutility = F`.
 
 ```{r}
 #| warning: false
 #| echo: true
-
-GSD <- getDesignGroupSequential(kMax = 2, 
-      informationRates = informationRates, 
-      alpha = 0.025,
-      beta = 0.2, 
-      sided = 1,
-      typeOfDesign = alphaSpending, 
-      typeBetaSpending = betaSpending, 
-      delayedInformation = 0, 
-      bindingFutility = F)
-
-summary(GSD)
-
+gsDesign <- getDesignGroupSequential(
+    kMax = 2,
+    informationRates = informationRates,
+    alpha = 0.025,
+    beta = 0.2,
+    sided = 1,
+    typeOfDesign = alphaSpending,
+    typeBetaSpending = betaSpending,
+    delayedInformation = 0,
+    bindingFutility = F
+)
+summary(gsDesign)
 ```
 
 ## Delayed response group-sequential design according to Hampson and Jennison (2013)
 
-Secondly, we initialize the delayed response group-sequential design by Hampson and Jennison (2013). We, however, propose a slightly modified version which is such that the lower boundary is nonbinding. We initialize this design by setting `delayedInformation = 0.3` and, again, `bindingFutility = F`.
+Secondly, we initialize the delayed response group-sequential design by Hampson
+and Jennison (2013). We, however, propose a slightly modified version which is
+such that the lower boundary is nonbinding. We initialize this design by setting
+`delayedInformation = 0.3` and, again, `bindingFutility = F`.
 
 ```{r}
 #| warning: false
 #| echo: true
+drgsDesign <- getDesignGroupSequential(
+    kMax = 2,
+    informationRates = informationRates,
+    alpha = 0.025,
+    beta = 0.2,
+    sided = 1,
+    typeOfDesign = alphaSpending,
+    typeBetaSpending = betaSpending,
+    delayedInformation = delayedInformation,
+    bindingFutility = F
+)
 
-DRGSD <- getDesignGroupSequential(kMax = 2, 
-      informationRates = informationRates, 
-      alpha = 0.025,
-      beta = 0.2, 
-      sided = 1,
-      typeOfDesign = alphaSpending, 
-      typeBetaSpending = betaSpending, 
-      delayedInformation = delayedInformation, 
-      bindingFutility = F)
-
-summary(DRGSD)
-
+summary(drgsDesign)
 ```
 
 ## Delayed response group-sequential design with double rejection criterion
 
-Lastly, we create a delayed response design that we call *double rejection design*. For details, we refer to the corresponding manuscript. The accompanying file `getDoubleRejectionDesign.R`contains the design implementation, making use of the function `getGroupSequentialProbabilities()`.
+Lastly, we create a delayed response design that we call *double rejection
+design*. For details, we refer to the corresponding manuscript. The accompanying
+file `getDoubleRejectionDesign.R`contains the design implementation, making use
+of the function `getGroupSequentialProbabilities()`.
 
 ```{r}
 #| echo: true
+drDesign <- getDoubleRejectionDesign(
+    informationRates = informationRates,
+    alpha = 0.025,
+    beta = 0.2,
+    typeOfDesign = alphaSpending,
+    typeBetaSpending = betaSpending,
+    delayedInformation = delayedInformation
+)
 
-DRD <- getDoubleRejectionDesign(
-      informationRates = informationRates, 
-      alpha = 0.025,
-      beta = 0.2, 
-      typeOfDesign = alphaSpending, 
-      typeBetaSpending = betaSpending, 
-      delayedInformation = delayedInformation)
-
-DRD
+drDesign
 ```
 
 # Evaluate design performance
 
-In this section, we evaluate the performance of the different design with respect to the parameters
+In this section, we evaluate the performance of the different design with
+respect to the parameters
 
 -   Probability to reject at interim
 -   Probability to obtain futility stopping
 -   Power
 -   Expected sample size
 
-We consider different effect sizes $\delta \in [-0.4, 0.8]$ to cover effects falling under $H_0$ and $H_1$ as well. The overall maximum number of subjects for both arms is set to `maxNumberOfSubjects <- 400` and the standard deviation is fixed at $\sigma = 1$
+We consider different effect sizes $\delta \in [-0.4, 0.8]$ to cover effects
+falling under $H_0$ and $H_1$ as well. The overall maximum number of subjects
+for both arms is set to `maxNumberOfSubjects <- 400` and the standard deviation
+is fixed at $\sigma = 1$
 
 ```{r}
 #| echo: true
 
-alternative <- seq(-0.4,0.8,0.05)
+alternative <- seq(-0.4, 0.8, 0.05)
 stDev <- 1
 maxNumberOfSubjects <- 400
 nAlternative <- length(alternative)
@@ -173,189 +195,261 @@ nAlternative <- length(alternative)
 # maxNumberOfSubjects <- 2*345
 # nAlternative <- length(alternative)
 
-methods <- c("GSD", "DRGSD", "DRD")
+methods <- c("gsDesign", "drgsDesign", "drDesign")
 nMethods <- length(methods)
 
 results <- data.frame(
-  alternative = rep(alternative, nMethods),
-  rejInterim = rep(NA, nAlternative*nMethods),
-  power = rep(NA, nAlternative*nMethods),
-  futility = rep(NA, nAlternative*nMethods),
-  expectedSampleSize = rep(NA, nAlternative*nMethods),
-  method = rep(methods, each = nAlternative)
+    alternative = rep(alternative, nMethods),
+    rejInterim = rep(NA, nAlternative * nMethods),
+    power = rep(NA, nAlternative * nMethods),
+    futility = rep(NA, nAlternative * nMethods),
+    expectedSampleSize = rep(NA, nAlternative * nMethods),
+    method = rep(methods, each = nAlternative)
 )
-
-
 ```
 
 ## Standard group-sequential design
 
-To evaluate the performance of the standard group-sequential design, we use the function `getPowerMeans(design = GSD,...)`, which directly produces all required results. The expected sample size needs to be slightly adjusted as the output does not consider the additional pipeline data. More formally, the expected sample size in a delayed response design is given through \begin{align}
- E_{DR}[N] &= (n_1 + n_{\Delta_t})P(early \, stopping) + n_{max}P(continue \,  to \, final) \\
-           &= n_{\Delta_t}P(early \, stopping) + n_{1}P(early \, stopping)  +  n_{max}P(continue \,  to \, final) \\
-           &= n_{\Delta_t}P(early \, stopping) + E[N] \\
-\end{align} We achieve this slight adjustment by adding `(delayedInformation*maxNumberOfSubjects)*performance$earlyStop` to the calculated expected sample size.
+To evaluate the performance of the standard group-sequential design, we use the
+function `getPowerMeans(design = gsDesign,...)`, which directly produces all required
+results. The expected sample size needs to be slightly adjusted as the output
+does not consider the additional pipeline data. More formally, the expected
+sample size in a delayed response design is given through \begin{align}
+ E_{DR}[N] &= (n_1 + n_{\Delta_t})P(early \, stopping) + n_{max}P(continue \,
+to \, final) \\            &= n_{\Delta_t}P(early \, stopping) + n_{1}P(early \, stopping)
++  n_{max}P(continue \,  to \, final) \\            &= n_{\Delta_t}P(early \, stopping) +
+E[N] \\ \end{align} We achieve this slight adjustment by adding
+`(delayedInformation*maxNumberOfSubjects)*performance$earlyStop` to the
+calculated expected sample size.
 
 ```{r}
 #| echo: true
+performance <- getPowerMeans(
+    design = gsDesign,
+    groups = 2,
+    normalApproximation = T,
+    alternative = alternative,
+    stDev = stDev,
+    maxNumberOfSubjects = maxNumberOfSubjects
+)
 
 index <- 1:nAlternative
-
-performance <- getPowerMeans(design = GSD,
-                 groups = 2, 
-                 normalApproximation = T, 
-                 alternative = alternative,
-                 stDev = stDev, 
-                 maxNumberOfSubjects = maxNumberOfSubjects)
-
-results$rejInterim[index] <- performance$rejectPerStage[1,]
+results$rejInterim[index] <- performance$rejectPerStage[1, ]
 results$power[index] <- performance$overallReject
 results$futility[index] <- performance$futilityStop
-results$expectedSampleSize[index] <- performance$expectedNumberOfSubjects + (delayedInformation*maxNumberOfSubjects)*performance$earlyStop
-
+results$expectedSampleSize[index] <- performance$expectedNumberOfSubjects +
+    (delayedInformation * maxNumberOfSubjects) * performance$earlyStop
 ```
 
 ## Delayed response group-sequential design according to Hampson and Jennison (2013)
 
-The evaluation of the delayed response group-sequential design is done similarly to before. No adjustments to the expected sample size need to be made as the design inherently takes the pipeline data into account. Futility at interim is observed with probability \begin{align}
- P(futility) &= P_{\delta}(Z_1 \notin [l_1, u_1], \tilde{Z}_1 \leq \tilde{d}_1) \\
-             &= P_{\delta}(Z_1 > u_1, \tilde{Z}_1 \leq \tilde{d}_1) + P_{\delta}(Z_1 < l_1, \tilde{Z}_1 \leq \tilde{d}_1).
-\end{align}
+The evaluation of the delayed response group-sequential design is done similarly
+to before. No adjustments to the expected sample size need to be made as the
+design inherently takes the pipeline data into account. Futility at interim is
+observed with probability \begin{align}  P(futility) &= P_{\delta}(Z_1 \notin
+[l_1, u_1], \tilde{Z}_1 \leq \tilde{d}_1) \\              &= P_{\delta}(Z_1 > u_1,
+\tilde{Z}_1 \leq \tilde{d}_1) + P_{\delta}(Z_1 < l_1, \tilde{Z}_1 \leq
+\tilde{d}_1). \end{align}
 
-The calculation of this probability is done in the function`calcFutility()` based on the boundaries returned by `getDesignGroupSequential()`.
+The calculation of this probability is done in the function`calcFutility()`
+based on the boundaries returned by `getDesignGroupSequential()`.
 
 ```{r}
 #| echo: true
 
-index <- (1+nAlternative):(2*nAlternative)
+index <- (1 + nAlternative):(2 * nAlternative)
 
-performance <- getPowerMeans(design = DRGSD, 
-                  groups = 2,
-                  normalApproximation = T, 
-                  alternative = alternative,
-                  stDev = stDev, 
-                  maxNumberOfSubjects = maxNumberOfSubjects)
+performance <- getPowerMeans(
+    design = drgsDesign,
+    groups = 2,
+    normalApproximation = T,
+    alternative = alternative,
+    stDev = stDev,
+    maxNumberOfSubjects = maxNumberOfSubjects
+)
 
-results$rejInterim[index] <- performance$rejectPerStage[1,]
+results$rejInterim[index] <- performance$rejectPerStage[1, ]
 results$power[index] <- performance$overallReject
 results$expectedSampleSize[index] <- performance$expectedNumberOfSubjects
 
 # Calculate futility probability
 
-DRGSD_information <- c(DRGSD$informationRates[1], DRGSD$informationRates[1] + DRGSD$delayedInformation[1], 1)
+drgsDesignInformation <- c(
+    drgsDesign$informationRates[1],
+    drgsDesign$informationRates[1] + drgsDesign$delayedInformation[1],
+    1
+)
 
-results$futility[index] <- calcFutility(fut = DRGSD$futilityBounds, crit = DRGSD$criticalValues, dec = DRGSD$decisionCriticalValues, alternative = alternative, stDev = stDev, maxNumberOfSubjects = maxNumberOfSubjects, informationRates = DRGSD_information)
-
+results$futility[index] <- calcFutility(
+    fut = drgsDesign$futilityBounds,
+    crit = drgsDesign$criticalValues,
+    dec = drgsDesign$decisionCriticalValues,
+    alternative = alternative,
+    stDev = stDev,
+    maxNumberOfSubjects = maxNumberOfSubjects,
+    informationRates = drgsDesignInformation
+)
 ```
 
 ## Delayed response group-sequential design with double rejection criterion
 
-For the double rejection approach, a user-written function for the calculation of the performance criteria is available in the file `getPowerMeansDoubleRejectionApproach.R`. The syntax is chosen in analogy to the `rpact` functions. Multivariate normal probabilities are evaluated using `sadmvn()` from the package `mnormt`.
+For the double rejection approach, a user-written function for the calculation
+of the performance criteria is available in the file
+`getPowerMeansDoubleRejectionApproach.R`. The syntax is chosen in analogy to the
+`rpact` functions. Multivariate normal probabilities are evaluated using
+`sadmvn()` from the package `mnormt`.
 
 ```{r}
 #| echo: true
+performance <- getPowerMeansDoubleRejectionApproach(
+    design = drDesign,
+    alternative = alternative,
+    stDev = stDev,
+    maxNumberOfSubjects = maxNumberOfSubjects
+)
 
-index <- (1+(2*nAlternative)):(3*nAlternative)
-
-performance <- getPowerMeansDoubleRejectionApproach(design = DRD, 
-  alternative = alternative, 
-  stDev = stDev, 
-  maxNumberOfSubjects = maxNumberOfSubjects)
-
+index <- (1 + (2 * nAlternative)):(3 * nAlternative)
 results$rejInterim[index] <- performance$rejInterim
 results$power[index] <- performance$power
 results$futility[index] <- performance$futility
 results$expectedSampleSize[index] <- performance$expectedSampleSize
-
 ```
 
 # Plot performance
 
-We use `ggplot2` to plot the performance criteria for the different effects $\delta \in [-0.4,0.8]$.
+We use `ggplot2` to plot the performance criteria for the different effects
+$\delta \in [-0.4,0.8]$.
 
 ```{r}
 #| echo: true
- 
+
 # Individual theme
-theme_single <- theme_bw() +
-  theme(
-    legend.position = "bottom",
-    legend.title = element_blank(),
-    plot.title = element_text(hjust = 0.5, size = 13, face = "italic"),
-    legend.text = element_text(size = 11),
-    legend.key.size = unit(1.5, "cm"),
-    legend.key.height = unit(1, "cm"),
-    legend.key.width = unit(1, "cm"),
-    strip.text = element_text(size = 12),
-    axis.text = element_text(size = 10),
-    axis.title = element_text(size = 12, face = "bold")
-  )
+themeSingle <- theme_bw() +
+    theme(
+        legend.position = "bottom",
+        legend.title = element_blank(),
+        plot.title = element_text(
+            hjust = 0.5,
+            size = 13, face = "italic"
+        ),
+        legend.text = element_text(size = 11),
+        legend.key.size = unit(1.5, "cm"),
+        legend.key.height = unit(1, "cm"),
+        legend.key.width = unit(1, "cm"),
+        strip.text = element_text(size = 12),
+        axis.text = element_text(size = 10),
+        axis.title = element_text(size = 12, face = "bold")
+    )
 
 # Plot of probabilities
 ggplot(results, aes(x = alternative, y = power, color = method)) +
-  geom_line(linewidth = 0.8, aes(linetype = "Power")) + 
-  geom_line(linewidth = 0.8, aes(x = alternative, y = rejInterim, group = method, linetype = "Rej.Interim")) +
-  geom_line(linewidth = 0.8, aes(x = alternative, y = futility, group = method, linetype = "Futility")) +
-  xlab(expression(delta)) + 
-  ylab("Power") +
-  scale_x_continuous(limits = c(min(alternative), max(alternative)), breaks = round(seq(min(alternative),max(alternative),0.1),3)) +
-  scale_color_manual(values = c("seagreen4", "orange2", "blue")) +
-    scale_linetype_manual(values = c("Power" = "solid", "Rej.Interim" = "dashed", "Futility" = "dotted"), breaks = c("Power", "Rej.Interim", "Futility")) +
-  theme_single
+    geom_line(linewidth = 0.8, aes(linetype = "Power")) +
+    geom_line(linewidth = 0.8, aes(
+        x = alternative, y = rejInterim,
+        group = method, linetype = "Rej.Interim"
+    )) +
+    geom_line(linewidth = 0.8, aes(
+        x = alternative, y = futility,
+        group = method, linetype = "Futility"
+    )) +
+    xlab(expression(delta)) +
+    ylab("Power") +
+    scale_x_continuous(
+        limits = c(min(alternative), max(alternative)),
+        breaks = round(seq(min(alternative), max(alternative), 0.1), 3)
+    ) +
+    scale_color_manual(values = c("seagreen4", "orange2", "blue")) +
+    scale_linetype_manual(
+        values = c(
+            "Power" = "solid",
+            "Rej.Interim" = "dashed",
+            "Futility" = "dotted"
+        ),
+        breaks = c("Power", "Rej.Interim", "Futility")
+    ) +
+    themeSingle
 
 # Plot of expected sample size
-ggplot(results, aes(x = alternative, y = expectedSampleSize, linetype = method, color = method)) +
-  geom_line(linewidth = 0.75) + 
-  xlab(expression(delta)) + 
-  ylab("E[N]") +
-  scale_x_continuous(limits = c(min(alternative), max(alternative)), breaks = round(seq(min(alternative),max(alternative),0.1),3)) +
-  scale_y_continuous(limits = c((informationRates[1]+delayedInformation)*maxNumberOfSubjects-20, maxNumberOfSubjects), breaks = seq(informationRates[1]*maxNumberOfSubjects,maxNumberOfSubjects,20)) +
-  geom_hline(yintercept = (informationRates[1]+delayedInformation)*maxNumberOfSubjects, linetype = "dashed") +
-  scale_color_manual(values = c("seagreen4", "orange2", "blue")) +
-  theme_single
-
+ggplot(results, aes(
+    x = alternative, y = expectedSampleSize,
+    linetype = method, color = method
+)) +
+    geom_line(linewidth = 0.75) +
+    xlab(expression(delta)) +
+    ylab("E[N]") +
+    scale_x_continuous(
+        limits = c(min(alternative), max(alternative)),
+        breaks = round(seq(min(alternative), max(alternative), 0.1), 3)
+    ) +
+    scale_y_continuous(
+        limits = c(
+            (informationRates[1] + delayedInformation) * maxNumberOfSubjects - 20,
+            maxNumberOfSubjects
+        ),
+        breaks = seq(
+            informationRates[1] * maxNumberOfSubjects,
+            maxNumberOfSubjects, 20
+        )
+    ) +
+    geom_hline(
+        yintercept =
+            (informationRates[1] + delayedInformation) * maxNumberOfSubjects,
+        linetype = "dashed"
+    ) +
+    scale_color_manual(values = c("seagreen4", "orange2", "blue")) +
+    themeSingle
 ```
 
 # Bringing it all together
 
-Finally, we can do the calculations from above for different designs depending on the interim information $I_1 \in \{0.3, 0.4, 0.5\}$ and $I_{\Delta_t} \in \{0.1, 0.2, 0.3\}$ by iterating over the different scenarios in a for-loop. Finally, we again plot the results for different settings using `facet_grid()`. To obtain different scenarios, only input parameters must be changed.
+Finally, we can do the calculations from above for different designs depending
+on the interim information $I_1 \in \{0.3, 0.4, 0.5\}$ and
+$I_{\Delta_t} \in \{0.1, 0.2, 0.3\}$ by iterating over the different scenarios
+in a for-loop. Finally, we again plot the results for different settings using
+`facet_grid()`. To obtain different scenarios, only input parameters must be
+changed.
 
 ```{r}
 #| warning: false
 #| message: false
- 
+
 # Theme for multiple plots in one grid
 theme_grid <- theme_bw() +
-  theme(
-    legend.position = "bottom",
-    legend.title = element_blank(),
-    plot.title = element_text(hjust = 0.5, size = 13, face = "italic"),
-    legend.text = element_text(size = 12),
-    legend.key.size = unit(1.5, "cm"),
-    legend.key.height = unit(1, "cm"),
-    legend.key.width = unit(1, "cm"),
-    strip.text = element_text(size = 12),
-    axis.text = element_text(size = 10),
-    axis.title = element_text(size = 12, face = "bold")
-  )
+    theme(
+        legend.position = "bottom",
+        legend.title = element_blank(),
+        plot.title = element_text(
+            hjust = 0.5,
+            size = 13, face = "italic"
+        ),
+        legend.text = element_text(size = 12),
+        legend.key.size = unit(1.5, "cm"),
+        legend.key.height = unit(1, "cm"),
+        legend.key.width = unit(1, "cm"),
+        strip.text = element_text(size = 12),
+        axis.text = element_text(size = 10),
+        axis.title = element_text(size = 12, face = "bold")
+    )
 
 # Design parameters
-interimInformation <- c(0.3,0.4,0.5)
-alphaSpending <- c("asP","asOF")
+interimInformation <- c(0.3, 0.4, 0.5)
+alphaSpending <- c("asP", "asOF")
 betaSpending <- c("bsP", "bsOF")
 delayedInformation <- c(0.1, 0.2, 0.3)
 
 # Effect, standard deviation and sample size
-alternative <- seq(-0.4,0.8,0.05)
+alternative <- seq(-0.4, 0.8, 0.05)
 nAlternative <- length(alternative)
 stDev <- 1
 maxNumberOfSubjects <- 400
 
 # Saving all considered cases in a data.frame()
-cases <- expand.grid(interimInformation = interimInformation,
-          alphaSpending = alphaSpending,
-          betaSpending = betaSpending,
-          delayedInformation = delayedInformation)
+cases <- expand.grid(
+    interimInformation = interimInformation,
+    alphaSpending = alphaSpending,
+    betaSpending = betaSpending,
+    delayedInformation = delayedInformation
+)
 
 # Input for typeOfDesign and typeBetaSpending should be character value
 cases$alphaSpending <- as.character(cases$alphaSpending)
@@ -363,157 +457,198 @@ cases$betaSpending <- as.character(cases$betaSpending)
 
 # Filter only cases in which alpha and beta-spending match
 cases <- cases[(cases$alphaSpending == "asOF" & cases$betaSpending == "bsOF") |
-               (cases$alphaSpending == "asP" & cases$betaSpending == "bsP"),]
+    (cases$alphaSpending == "asP" & cases$betaSpending == "bsP"), ]
 
 # Count the number of cases
 nCases <- nrow(cases)
 
 # The three different methpods
-methods <- c("GSD", "DRGSD", "DRD")
+methods <- c("gsDesign", "drgsDesign", "drDesign")
 nMethods <- length(methods)
 
 # Placeholder for the results of a single setting
 results <- data.frame(
-  interimInformation = rep(NA, nMethods*nAlternative),
-  delayedInformation = rep(NA, nMethods*nAlternative),
-  alphaSpending = rep(NA, nMethods*nAlternative),
-  betaSpending = rep(NA, nMethods*nAlternative),
-  alternative = rep(alternative, nMethods),
-  rejInterim = rep(NA, nAlternative*nMethods),
-  power = rep(NA, nAlternative*nMethods),
-  futility = rep(NA, nAlternative*nMethods),
-  expectedSampleSize = rep(NA, nAlternative*nMethods),
-  method = rep(methods, each = nAlternative)
+    interimInformation = rep(NA, nMethods * nAlternative),
+    delayedInformation = rep(NA, nMethods * nAlternative),
+    alphaSpending = rep(NA, nMethods * nAlternative),
+    betaSpending = rep(NA, nMethods * nAlternative),
+    alternative = rep(alternative, nMethods),
+    rejInterim = rep(NA, nAlternative * nMethods),
+    power = rep(NA, nAlternative * nMethods),
+    futility = rep(NA, nAlternative * nMethods),
+    expectedSampleSize = rep(NA, nAlternative * nMethods),
+    method = rep(methods, each = nAlternative)
 )
 
 # List in which results for all settings will be saved as data.frame()
 results_all <- list()
 
 # For-loop iterating over the different considered settings
-for(i in 1:nCases) {
+for (i in 1:nCases) {
+    # Initialisation of gsDesign
+    gsDesign <- getDesignGroupSequential(
+        kMax = 2,
+        informationRates = c(cases$interimInformation[i], 1),
+        alpha = 0.025,
+        beta = 0.2,
+        sided = 1,
+        typeOfDesign = cases$alphaSpending[i],
+        typeBetaSpending = cases$betaSpending[i],
+        delayedInformation = 0,
+        bindingFutility = F
+    )
 
-  # Initialisation of GSD
-  GSD <- getDesignGroupSequential(kMax = 2,
-      informationRates = c(cases$interimInformation[i],1),
-      alpha = 0.025,
-      beta = 0.2,
-      sided = 1,
-      typeOfDesign = cases$alphaSpending[i],
-      typeBetaSpending = cases$betaSpending[i],
-      delayedInformation = 0,
-      bindingFutility = F)
+    index <- 1:nAlternative
 
-  index <- 1:nAlternative
-  
-  # Performance evaluation of GSD
-  performance <- getPowerMeans(design = GSD,
-            groups = 2,
-            normalApproximation = T,
-            alternative = alternative,
-            stDev = stDev,
-            maxNumberOfSubjects = maxNumberOfSubjects)
+    # Performance evaluation of gsDesign
+    performance <- getPowerMeans(
+        design = gsDesign,
+        groups = 2,
+        normalApproximation = T,
+        alternative = alternative,
+        stDev = stDev,
+        maxNumberOfSubjects = maxNumberOfSubjects
+    )
 
-  results$rejInterim[index] <- performance$rejectPerStage[1,]
-  results$power[index] <- performance$overallReject
-  results$futility[index] <- performance$futilityStop
-  results$expectedSampleSize[index] <- performance$expectedNumberOfSubjects + (cases$delayedInformation[i]*maxNumberOfSubjects)*performance$earlyStop
+    results$rejInterim[index] <- performance$rejectPerStage[1, ]
+    results$power[index] <- performance$overallReject
+    results$futility[index] <- performance$futilityStop
+    results$expectedSampleSize[index] <- performance$expectedNumberOfSubjects +
+        (cases$delayedInformation[i] * maxNumberOfSubjects) * performance$earlyStop
 
-  # Initialisation of DRGSD
-  DRGSD <- getDesignGroupSequential(kMax = 2,
-      informationRates = c(cases$interimInformation[i],1),
-      alpha = 0.025,
-      beta = 0.2,
-      sided = 1,
-      typeOfDesign = cases$alphaSpending[i],
-      typeBetaSpending = cases$betaSpending[i],
-      delayedInformation = cases$delayedInformation[i],
-      bindingFutility = F)
+    # Initialisation of drgsDesign
+    drgsDesign <- getDesignGroupSequential(
+        kMax = 2,
+        informationRates = c(cases$interimInformation[i], 1),
+        alpha = 0.025,
+        beta = 0.2,
+        sided = 1,
+        typeOfDesign = cases$alphaSpending[i],
+        typeBetaSpending = cases$betaSpending[i],
+        delayedInformation = cases$delayedInformation[i],
+        bindingFutility = F
+    )
 
-  index <- (1+nAlternative):(2*nAlternative)
-  
-  # Performance evaluation of DRGSD
-  performance <- getPowerMeans(design = DRGSD,
-          groups = 2,
-          normalApproximation = T,
-          alternative = alternative,
-          stDev = stDev,
-          maxNumberOfSubjects = maxNumberOfSubjects)
+    index <- (1 + nAlternative):(2 * nAlternative)
 
-  results$rejInterim[index] <- performance$rejectPerStage[1,]
-  results$power[index] <- performance$overallReject
-  results$expectedSampleSize[index] <- performance$expectedNumberOfSubjects
-  
-  informationRatesUponDelay <- c(DRGSD$informationRates[1],
-                                 DRGSD$informationRates[1] + DRGSD$delayedInformation[1], 1)
- 
-  results$futility[index] <- calcFutility(fut = DRGSD$futilityBounds,
-                                crit = DRGSD$criticalValues, 
-                                dec = DRGSD$decisionCriticalValues, 
-                                alternative = alternative, 
-                                stDev = stDev, 
-                                maxNumberOfSubjects = maxNumberOfSubjects, 
-                                informationRates = informationRatesUponDelay)
-  
-  # Initialisation of DRD
-  DRD <- getDoubleRejectionDesign(
-      informationRates = c(cases$interimInformation[i],1),
-      alpha = 0.025,
-      beta = 0.2,
-      typeOfDesign = cases$alphaSpending[i],
-      typeBetaSpending = cases$betaSpending[i],
-      delayedInformation = cases$delayedInformation[i])
+    # Performance evaluation of drgsDesign
+    performance <- getPowerMeans(
+        design = drgsDesign,
+        groups = 2,
+        normalApproximation = T,
+        alternative = alternative,
+        stDev = stDev,
+        maxNumberOfSubjects = maxNumberOfSubjects
+    )
 
-  index <- (1+(2*nAlternative)):(3*nAlternative)
+    results$rejInterim[index] <- performance$rejectPerStage[1, ]
+    results$power[index] <- performance$overallReject
+    results$expectedSampleSize[index] <- performance$expectedNumberOfSubjects
 
-  # Performance evaluation of DRD
-  performance <- getPowerMeansDoubleRejectionApproach(design = DRD,
-    alternative = alternative,
-    stDev = stDev,
-    maxNumberOfSubjects = maxNumberOfSubjects)
-  
-  
-  # Saving everything in results
-  results$rejInterim[index] <- performance$rejInterim
-  results$power[index] <- performance$power
-  results$futility[index] <- performance$futility
-  results$expectedSampleSize[index] <- performance$expectedSampleSize
-  
-  # Save design characteristics as well
-  results$interimInformation <- cases$interimInformation[i]
-  results$delayedInformation <- cases$delayedInformation[i]
-  results$alphaSpending <- cases$alphaSpending[i]
-  results$betaSpending <- cases$betaSpending[i]
+    informationRatesUponDelay <- c(
+        drgsDesign$informationRates[1],
+        drgsDesign$informationRates[1] + drgsDesign$delayedInformation[1], 1
+    )
 
-  # Saving results in the results_all list
-  results_all[[i]] <- results
+    results$futility[index] <- calcFutility(
+        fut = drgsDesign$futilityBounds,
+        crit = drgsDesign$criticalValues,
+        dec = drgsDesign$decisionCriticalValues,
+        alternative = alternative,
+        stDev = stDev,
+        maxNumberOfSubjects = maxNumberOfSubjects,
+        informationRates = informationRatesUponDelay
+    )
 
-  # Naming of the entries in results_all
-  names(results_all)[i] <- paste(cases$alphaSpending[i],cases$betaSpending[i],"I1=",cases$interimInformation[i],"Id =", cases$delayedInformation[i])
+    # Initialisation of drDesign
+    drDesign <- getDoubleRejectionDesign(
+        informationRates = c(cases$interimInformation[i], 1),
+        alpha = 0.025,
+        beta = 0.2,
+        typeOfDesign = cases$alphaSpending[i],
+        typeBetaSpending = cases$betaSpending[i],
+        delayedInformation = cases$delayedInformation[i]
+    )
 
+    index <- (1 + (2 * nAlternative)):(3 * nAlternative)
+
+    # Performance evaluation of drDesign
+    performance <- getPowerMeansDoubleRejectionApproach(
+        design = drDesign,
+        alternative = alternative,
+        stDev = stDev,
+        maxNumberOfSubjects = maxNumberOfSubjects
+    )
+
+
+    # Saving everything in results
+    results$rejInterim[index] <- performance$rejInterim
+    results$power[index] <- performance$power
+    results$futility[index] <- performance$futility
+    results$expectedSampleSize[index] <- performance$expectedSampleSize
+
+    # Save design characteristics as well
+    results$interimInformation <- cases$interimInformation[i]
+    results$delayedInformation <- cases$delayedInformation[i]
+    results$alphaSpending <- cases$alphaSpending[i]
+    results$betaSpending <- cases$betaSpending[i]
+
+    # Saving results in the results_all list
+    results_all[[i]] <- results
+
+    # Naming of the entries in results_all
+    names(results_all)[i] <- paste(
+        cases$alphaSpending[i],
+        cases$betaSpending[i], "I1=", cases$interimInformation[i],
+        "Id =", cases$delayedInformation[i]
+    )
 }
 
 # Merge results for all settings
 results_all <- do.call(rbind, results_all)
 
 # Filter for Pocock-like spending function; Change to "asOF" for O'Brien-Fleming-like spending function
-results_all <- results_all[results_all$alphaSpending=="asP",]
+results_all <- results_all[results_all$alphaSpending == "asP", ]
 
 # Probabilities plot
 power <- ggplot(results_all, aes(x = alternative, y = power, color = method)) +
-  geom_line(size = 0.9, aes(linetype = "Power")) +
-  geom_line(size = 0.9, aes(x = alternative, y = rejInterim, group = method, linetype = "Rej.Interim")) +
-  geom_line(size = 0.9, aes(x = alternative, y = futility, group = method, linetype = "Futility")) +
-  facet_grid(rows = vars(delayedInformation), cols = vars(interimInformation)) +
-  xlab(expression(delta)) +
-  ylab("Probability") +
-  scale_x_continuous(limits = c(min(alternative), max(alternative)), breaks = round(seq(min(alternative),max(alternative),0.2),3),
-  sec.axis = sec_axis(~ . , name = expression(paste("Interim Information ", I[1])), breaks = NULL, labels = NULL)) +
-  scale_y_continuous(sec.axis = sec_axis(~ . , name = expression(paste("Amount of Pipeline Data ", I[Delta[t]])), breaks = NULL, labels = NULL)) +
-  scale_color_manual(values = c("seagreen", "orange2", "blue")) +
-    scale_linetype_manual(values = c("Power" = "solid", "Rej.Interim" = "dashed", "Futility" = "dotted"), breaks = c("Power", "Rej.Interim", "Futility")) +
-  theme_grid
+    geom_line(size = 0.9, aes(linetype = "Power")) +
+    geom_line(size = 0.9, aes(
+        x = alternative, y = rejInterim,
+        group = method, linetype = "Rej.Interim"
+    )) +
+    geom_line(size = 0.9, aes(
+        x = alternative, y = futility,
+        group = method, linetype = "Futility"
+    )) +
+    facet_grid(rows = vars(delayedInformation), cols = vars(interimInformation)) +
+    xlab(expression(delta)) +
+    ylab("Probability") +
+    scale_x_continuous(
+        limits = c(min(alternative), max(alternative)),
+        breaks = round(seq(min(alternative), max(alternative), 0.2), 3),
+        sec.axis = sec_axis(~.,
+            name = expression(paste("Interim Information ", I[1])),
+            breaks = NULL, labels = NULL
+        )
+    ) +
+    scale_y_continuous(sec.axis = sec_axis(~.,
+        name = expression(paste("Amount of Pipeline Data ", I[Delta[t]])),
+        breaks = NULL, labels = NULL
+    )) +
+    scale_color_manual(values = c("seagreen", "orange2", "blue")) +
+    scale_linetype_manual(
+        values = c(
+            "Power" = "solid",
+            "Rej.Interim" = "dashed", "Futility" = "dotted"
+        ),
+        breaks = c("Power", "Rej.Interim", "Futility")
+    ) +
+    theme_grid
 
-# If the lines are overlapping, geom_path() can be used alternatively to geom_line() to slightly shift the lines using position_dodge() ; Uncomment the code below in that case
+# If the lines are overlapping, geom_path() can be used alternatively to
+# geom_line() to slightly shift the lines using position_dodge();
+# Uncomment the code below in that case.
 
 # power <- ggplot(results_all, aes(x = alternative, y = power, color = method)) +
 #   geom_path(position = position_dodge(width = 0.02), size = 0.9, aes(linetype = "Power")) +
@@ -530,16 +665,18 @@ power <- ggplot(results_all, aes(x = alternative, y = power, color = method)) +
 #   theme_grid
 
 # Expected sample size plot
-eN <- ggplot(results_all, aes(x = alternative, y = expectedSampleSize,  linetype = method, color = method)) +
-  geom_line(size = 0.9) +
-  facet_grid(rows = vars(delayedInformation), cols = vars(interimInformation), scales = "free") +
-  xlab(expression(delta)) +
-  ylab("E[N]") +
-  scale_x_continuous(limits = c(min(alternative), max(alternative)), breaks = round(seq(min(alternative),max(alternative),0.2),3),
-  sec.axis = sec_axis(~ . , name = expression(paste("Interim Information ", I[1])), breaks = NULL, labels = NULL)) +
-  scale_y_continuous(sec.axis = sec_axis(~ . , name = expression(paste("Amount of Pipeline Data ", I[Delta[t]])), breaks = NULL, labels = NULL), limits = c(160, 400)) +
-  scale_color_manual(values = c("seagreen", "orange2", "blue")) +
-  theme_grid
+eN <- ggplot(results_all, aes(x = alternative, y = expectedSampleSize, linetype = method, color = method)) +
+    geom_line(size = 0.9) +
+    facet_grid(rows = vars(delayedInformation), cols = vars(interimInformation), scales = "free") +
+    xlab(expression(delta)) +
+    ylab("E[N]") +
+    scale_x_continuous(
+        limits = c(min(alternative), max(alternative)), breaks = round(seq(min(alternative), max(alternative), 0.2), 3),
+        sec.axis = sec_axis(~., name = expression(paste("Interim Information ", I[1])), breaks = NULL, labels = NULL)
+    ) +
+    scale_y_continuous(sec.axis = sec_axis(~., name = expression(paste("Amount of Pipeline Data ", I[Delta[t]])), breaks = NULL, labels = NULL), limits = c(160, 400)) +
+    scale_color_manual(values = c("seagreen", "orange2", "blue")) +
+    theme_grid
 
 # If the lines are overlapping, geom_path() can be used alternatively to geom_line() to slightly shift the lines using position_dodge() ; Uncomment the code below in that case
 # eN <- ggplot(results_all, aes(x = alternative, y = expectedSampleSize, linetype = method, color = method)) +
@@ -553,15 +690,20 @@ eN <- ggplot(results_all, aes(x = alternative, y = expectedSampleSize,  linetype
 #   scale_color_manual(values = c("seagreen", "orange2", "blue")) +
 #   theme_grid
 
-
 power
 eN
-
 ```
 
 # Simulation of Expected Sample Size
 
-The actual sample size as well as the power are directly dependent upon the joint distribution of the test statistics. If the statistics are known to follow a normal distribution, formulas to do calculations of location components are readily available. In our manuscript, we argue that also variance components (such as $Var_{\delta}(N)$) should be considered in performance evaluation. However, no straightforward formulas for the calculation of the variance of sample size and power exist. Therefore, we use simulation to obtain an empirical distribution of the random variables.
+The actual sample size as well as the power are directly dependent upon the
+joint distribution of the test statistics. If the statistics are known to follow
+a normal distribution, formulas to do calculations of location components are
+readily available. In our manuscript, we argue that also variance components
+(such as $Var_{\delta}(N)$) should be considered in performance evaluation.
+However, no straightforward formulas for the calculation of the variance of
+sample size and power exist. Therefore, we use simulation to obtain an empirical
+distribution of the random variables.
 
 ```{r}
 # Parameters
@@ -580,18 +722,24 @@ typeOfDesign <- "asOF"
 typeBetaSpending <- "bsOF"
 
 # True means and covariance matrix
-informationRatesUponDelay <- c(interimInformation, interimInformation + delayedInformation, 1)
-mu <- alternative / sqrt(2 * stDev^2) * sqrt(informationRatesUponDelay * maxNumberOfSubjects/2)
+informationRatesUponDelay <- c(
+    interimInformation,
+    interimInformation + delayedInformation, 1
+)
+mu <- alternative / sqrt(2 * stDev^2) *
+    sqrt(informationRatesUponDelay * maxNumberOfSubjects / 2)
 sigma <- getCovarianceFromInformation(informationRatesUponDelay)
 
 # Data frame to store results
-resultsSim <- data.frame(Method = character(nsim), 
+resultsSim <- data.frame(
+    Method = character(nsim),
     Power = numeric(nsim),
-    expectedNumberOfSubjects = numeric(nsim), 
-    stringsAsFactors = FALSE)
+    expectedNumberOfSubjects = numeric(nsim),
+    stringsAsFactors = FALSE
+)
 
 # Group-sequential design
-GSD <- getDesignGroupSequential(
+gsDesign <- getDesignGroupSequential(
     kMax = 2,
     alpha = alpha,
     beta = beta,
@@ -600,10 +748,10 @@ GSD <- getDesignGroupSequential(
     typeBetaSpending = typeBetaSpending,
     bindingFutility = FALSE
 )
-  
-  
+
+
 # Delayed response group-sequential design
-DRGSD <- getDesignGroupSequential(
+drgsDesign <- getDesignGroupSequential(
     kMax = 2,
     alpha = alpha,
     beta = beta,
@@ -614,100 +762,110 @@ DRGSD <- getDesignGroupSequential(
     bindingFutility = FALSE
 )
 
-    
+
 # Double Rejection Design
-DRD <- getDoubleRejectionDesign(
-      informationRates = informationRates, 
-      alpha = alpha,
-      beta = beta, 
-      typeOfDesign = typeOfDesign, 
-      typeBetaSpending = typeBetaSpending, 
-      delayedInformation = delayedInformation)
+drDesign <- getDoubleRejectionDesign(
+    informationRates = informationRates,
+    alpha = alpha,
+    beta = beta,
+    typeOfDesign = typeOfDesign,
+    typeBetaSpending = typeBetaSpending,
+    delayedInformation = delayedInformation
+)
 
 seed <- 19032024
-  
+
 for (i in 1:nsim) {
+    set.seed(seed + i)
 
-  set.seed(seed + i)
-  
-  # Simulating multivariate normal random variables as test statistics
-  statistics <- rmvnorm(10000, mean = mu, sigma = sigma)
-  Z1 <- statistics[, 1]
-  Z1tilde <- statistics[, 2]
-  Z12 <- statistics[, 3]
-   
-  # Simulate power and expected sample size values for all designs
-  powerGSD <- mean((Z1 > GSD$criticalValues[1]) |
-                   (GSD$futilityBounds < Z1 & Z1 < GSD$criticalValues[1] & Z12 > GSD$criticalValues[2]))
-  
-  eNGSD <- mean(informationRatesUponDelay[2] * maxNumberOfSubjects * (Z1 > GSD$criticalValues[1] | (Z1 < GSD$futilityBounds[1])) +
-                maxNumberOfSubjects * (GSD$futilityBounds < Z1 & Z1 < GSD$criticalValues[1]))
-  
-  
-  powerDRGSD <- mean((Z1 > DRGSD$criticalValues[1] & Z1tilde > DRGSD$decisionCriticalValues[1]) |
-                     (Z1 < DRGSD$futilityBounds[1] & Z1tilde > DRGSD$decisionCriticalValues[1]) |
-                     (DRGSD$futilityBounds[1] < Z1 & Z1 < DRGSD$criticalValues[1] & Z12 > DRGSD$decisionCriticalValues[2]))
-  
-  eNDRGSD <- mean(informationRatesUponDelay[2] * maxNumberOfSubjects * ((Z1 > DRGSD$criticalValues[1]) |
-                    (Z1 < DRGSD$futilityBounds[1] )) + maxNumberOfSubjects * (DRGSD$futilityBounds[1]  < Z1 & Z1 < DRGSD$criticalValues[1]))
-  
-  
-  powerDRD <- mean((Z1 > DRD$upper[1] & Z1tilde > DRD$upper[2]) |
-                   (DRD$lower[1] < Z1 & Z1 < DRD$upper[1] & Z12 > DRD$upper[3]))
-  
-  enDRD <- mean(informationRatesUponDelay[2] * maxNumberOfSubjects * (Z1 > DRD$upper[1] | Z1 < DRD$lower[1]) +
-                 maxNumberOfSubjects * (DRD$lower[1] < Z1 & Z1 < DRD$upper[1]))
+    # Simulating multivariate normal random variables as test statistics
+    statistics <- rmvnorm(10000, mean = mu, sigma = sigma)
+    Z1 <- statistics[, 1]
+    Z1tilde <- statistics[, 2]
+    Z12 <- statistics[, 3]
+
+    # Simulate power and expected sample size values for all designs
+    powerGSD <- mean((Z1 > gsDesign$criticalValues[1]) |
+        (gsDesign$futilityBounds < Z1 & Z1 < gsDesign$criticalValues[1] &
+            Z12 > gsDesign$criticalValues[2]))
+
+    eNGSD <- mean(informationRatesUponDelay[2] *
+        maxNumberOfSubjects * (Z1 > gsDesign$criticalValues[1] |
+            (Z1 < gsDesign$futilityBounds[1])) +
+        maxNumberOfSubjects * (gsDesign$futilityBounds < Z1 & Z1 < gsDesign$criticalValues[1]))
 
 
-  # Save results in data frame
-  resultsSim[i, ] <- c("GSD", powerGSD, eNGSD)
-  resultsSim[i + nsim, ] <- c("DRGSD", powerDRGSD, eNDRGSD)
-  resultsSim[i + 2*nsim, ] <- c("DRD", powerDRD, enDRD)
+    powerDRGSD <- mean((Z1 > drgsDesign$criticalValues[1] &
+        Z1tilde > drgsDesign$decisionCriticalValues[1]) |
+        (Z1 < drgsDesign$futilityBounds[1] &
+            Z1tilde > drgsDesign$decisionCriticalValues[1]) |
+        (drgsDesign$futilityBounds[1] < Z1 &
+            Z1 < drgsDesign$criticalValues[1] &
+            Z12 > drgsDesign$decisionCriticalValues[2]))
 
+    eNDRGSD <- mean(informationRatesUponDelay[2] * maxNumberOfSubjects *
+        ((Z1 > drgsDesign$criticalValues[1]) |
+            (Z1 < drgsDesign$futilityBounds[1])) + maxNumberOfSubjects *
+            (drgsDesign$futilityBounds[1] < Z1 & Z1 < drgsDesign$criticalValues[1]))
+
+
+    powerDRD <- mean((Z1 > drDesign$upper[1] & Z1tilde > drDesign$upper[2]) |
+        (drDesign$lower[1] < Z1 & Z1 < drDesign$upper[1] & Z12 > drDesign$upper[3]))
+
+    enDRD <- mean(informationRatesUponDelay[2] * maxNumberOfSubjects *
+        (Z1 > drDesign$upper[1] | Z1 < drDesign$lower[1]) +
+        maxNumberOfSubjects * (drDesign$lower[1] < Z1 & Z1 < drDesign$upper[1]))
+
+
+    # Save results in data frame
+    resultsSim[i, ] <- c("gsDesign", powerGSD, eNGSD)
+    resultsSim[i + nsim, ] <- c("drgsDesign", powerDRGSD, eNDRGSD)
+    resultsSim[i + 2 * nsim, ] <- c("drDesign", powerDRD, enDRD)
 }
 
 # Save results
-resultsSim$Method <- factor(resultsSim$Method, levels = c('GSD','DRGSD', "DRD"), ordered = TRUE)
+resultsSim$Method <- factor(resultsSim$Method,
+    levels = c("gsDesign", "drgsDesign", "drDesign"),
+    ordered = TRUE
+)
 resultsSim$Power <- as.numeric(resultsSim$Power)
 resultsSim$eN <- as.numeric(resultsSim$expectedNumberOfSubjects)
 
 # Theme for plotting simulation results
 theme_sim <- theme_bw() +
-  theme(
-    legend.position = "none",
-    legend.title = element_blank(),
-    plot.title = element_text(hjust = 0.5, size = 13, face = "italic"),
-    legend.text = element_text(size = 20),
-    legend.key.size = unit(1.5, "cm"),
-    legend.key.height = unit(1, "cm"),
-    legend.key.width = unit(1, "cm"),
-    strip.text = element_text(size = 12),
-    axis.text = element_text(size = 15),
-    axis.title = element_text(size = 15, face = "bold")
-  )
+    theme(
+        legend.position = "none",
+        legend.title = element_blank(),
+        plot.title = element_text(hjust = 0.5, size = 13, face = "italic"),
+        legend.text = element_text(size = 20),
+        legend.key.size = unit(1.5, "cm"),
+        legend.key.height = unit(1, "cm"),
+        legend.key.width = unit(1, "cm"),
+        strip.text = element_text(size = 12),
+        axis.text = element_text(size = 15),
+        axis.title = element_text(size = 15, face = "bold")
+    )
 
 # Power simulation
 power_sim <- ggplot(resultsSim, aes(x = Method, y = Power, fill = Method)) +
-  geom_boxplot() +
-  scale_x_discrete(labels = c("GSD", "DRGSD", "DRD")) +
-  scale_y_continuous(limits = c(0.82, 0.85), breaks = c(0.82, 0.83, 0.84, 0.85)) +
-  xlab("") +
-  ylab("Simulated Power") +
-  scale_fill_manual(values = c("seagreen4", "orange2", "blue")) +
-  theme_sim 
+    geom_boxplot() +
+    scale_x_discrete(labels = c("gsDesign", "drgsDesign", "drDesign")) +
+    scale_y_continuous(limits = c(0.82, 0.85), breaks = c(0.82, 0.83, 0.84, 0.85)) +
+    xlab("") +
+    ylab("Simulated Power") +
+    scale_fill_manual(values = c("seagreen4", "orange2", "blue")) +
+    theme_sim
 
 # Expected sample size simulation
 eN_sim <- ggplot(resultsSim, aes(x = Method, y = eN, fill = Method)) +
-  geom_boxplot() +
-  scale_x_discrete(labels = c("GSD", "DRGSD", "DRD")) +
-  scale_y_continuous(limits = c(366, 372), breaks = c(366, 368, 370, 372)) +
-  xlab("") +
-  ylab("E[N]") +
-  scale_fill_manual(values = c("seagreen4", "orange2", "blue")) +
-  theme_sim
-
+    geom_boxplot() +
+    scale_x_discrete(labels = c("gsDesign", "drgsDesign", "drDesign")) +
+    scale_y_continuous(limits = c(366, 372), breaks = c(366, 368, 370, 372)) +
+    xlab("") +
+    ylab("E[N]") +
+    scale_fill_manual(values = c("seagreen4", "orange2", "blue")) +
+    theme_sim
 
 power_sim
 eN_sim
-
 ```
